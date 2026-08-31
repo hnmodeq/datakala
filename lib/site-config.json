@@ -1,33 +1,61 @@
 {
-  "siteName": "دیتاکالا",
-  "primary": "#C00000",
+  "siteName": "دیتاکالا | فروشگاه تجهیزات دیتاسنتری",
+  "primary": "#e11d48",
   "favicon": null,
   "logo": null,
   "heroSlides": null,
   "sections": {
-    "topbar": true,
+    "topbar": false,
     "header": true,
     "hero": true,
     "hero-categories": true,
     "new-products": true,
     "recommendations": true,
-    "platforms": true,
-    "solutions": true,
-    "certificates": true,
-    "blog": true,
+    "platforms": false,
+    "solutions": false,
+    "certificates": false,
+    "blog": false,
     "contacts": true,
     "footer": true,
-    "subfooter": true,
+    "subfooter": false,
     "subfooter2": true
   },
   "sectionTitles": {
-    "new-products": { "text": "محصولات جدید", "size": 22, "weight": 600 },
-    "recommendations": { "text": "پیشنهادی", "size": 22, "weight": 600 },
-    "platforms": { "text": "پلتفرم نرم‌افزاری PicOS", "size": 22, "weight": 600 },
-    "solutions": { "text": "راه‌حل‌های شاخص", "size": 22, "weight": 600 },
-    "certificates": { "text": "گواهی‌شده توسط FS", "size": 22, "weight": 600 },
-    "blog": { "text": "مطالعات موردی", "size": 22, "weight": 600 },
-    "contacts": { "text": "اطلاعات بیشتر بگیرید", "size": 22, "weight": 600 }
+    "new-products": {
+      "text": "تجهیزات جدید",
+      "size": 22,
+      "weight": 600
+    },
+    "recommendations": {
+      "text": "پیشنهادی برای شما",
+      "size": 22,
+      "weight": 600
+    },
+    "platforms": {
+      "text": "پلتفرم نرم‌افزاری PicOS",
+      "size": 22,
+      "weight": 600
+    },
+    "solutions": {
+      "text": "راه‌حل‌های شاخص",
+      "size": 22,
+      "weight": 600
+    },
+    "certificates": {
+      "text": "گواهی‌شده توسط FS",
+      "size": 22,
+      "weight": 600
+    },
+    "blog": {
+      "text": "مطالعات موردی",
+      "size": 22,
+      "weight": 600
+    },
+    "contacts": {
+      "text": "با ما در ارتباط باشید",
+      "size": 22,
+      "weight": 600
+    }
   },
   "font": null
 }
