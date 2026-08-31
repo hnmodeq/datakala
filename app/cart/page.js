@@ -11,7 +11,7 @@ export default function CartPage() {
     <div className="container" style={{ paddingTop: 20 }}>
       <h1 style={{ fontSize: 24, margin: "8px 0 18px" }}>سبد خرید</h1>
       {!lined.length ? (
-        <div className="empty">سبد خرید شما خالی است. <Link href="/" style={{ color: "#C00000" }}>ادامه خرید</Link></div>
+        <div className="empty">سبد خرید شما خالی است. <Link href="/" style={{ color: "var(--red)" }}>ادامه خرید</Link></div>
       ) : (
         <div className="cart-wrap">
           <div>
@@ -21,14 +21,14 @@ export default function CartPage() {
                 <div>
                   <div className="sku" style={{ fontSize: 12, color: "#888" }}>{p.sku}</div>
                   <h3><Link href={`/products/${p.id}`}>{p.name}</Link></h3>
-                  <button onClick={() => remove(p.id)} style={{ fontSize: 12, color: "#C00000", marginTop: 6 }}>حذف</button>
+                  <button onClick={() => remove(p.id)} style={{ fontSize: 12, color: "var(--red)", marginTop: 6 }}>حذف</button>
                 </div>
                 <div className="qty">
                   <button onClick={() => setQty(p.id, qty - 1)}>−</button>
                   <input value={qty} readOnly />
                   <button onClick={() => setQty(p.id, qty + 1)}>+</button>
                 </div>
-                <div style={{ fontWeight: 700, color: "#C00000" }}>{money(p.price * qty)}</div>
+                <div style={{ fontWeight: 700, color: "var(--red)" }}>{money(p.price * qty)}</div>
               </div>
             ))}
           </div>

@@ -14,7 +14,7 @@ export default function BuyBox({ p }) {
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
         {variants.map((v) => (
           <Link key={v.id} href={`/products/${v.id}`}>
-            <button style={{ border: `1px solid ${v.id === p.id ? "#C00000" : "#E8E8E8"}`, color: v.id === p.id ? "#C00000" : "#19191A", padding: "8px 10px", borderRadius: 4, fontSize: 12, background: v.id === p.id ? "#fff5f5" : "#fff" }}>{v.sku}</button>
+            <button style={{ border: `1px solid ${v.id === p.id ? "var(--red)" : "#E8E8E8"}`, color: v.id === p.id ? "var(--red)" : "#19191A", padding: "8px 10px", borderRadius: 4, fontSize: 12, background: v.id === p.id ? "var(--red-soft)" : "#fff" }}>{v.sku}</button>
           </Link>
         ))}
       </div>

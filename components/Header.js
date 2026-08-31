@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
+import Section from "./Section";
 import { CATEGORIES, PRODUCTS, money } from "@/lib/data";
 import { MEGA, NAV_MENUS, NAV_LABELS } from "@/lib/mega";
 import { useCart } from "./CartProvider";
@@ -47,6 +48,7 @@ export default function Header() {
 
   return (
     <header className="header">
+      <Section id="topbar">
       <div className="topbar">
         <div className="container">
           <div className="top-left">
@@ -69,7 +71,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+      </Section>
 
+      <Section id="header">
       <div className="header-bar">
         <div className="container header-row">
           <button className="mobile-toggle" onClick={() => setNavOpen((v) => !v)} aria-label="منو">☰</button>
@@ -176,6 +180,7 @@ export default function Header() {
           </div>
         )}
       </div>
+      </Section>
     </header>
   );
 }

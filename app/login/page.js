@@ -35,7 +35,7 @@ export default function Login() {
         <button className="btn btn-red" type="submit" style={{ width: "100%", justifyContent: "center" }}>ورود</button>
         <p className="or">یا ورود با روش‌های دیگر</p>
         <div className="oauth"><span>G</span><span>P</span><span>f</span><span>in</span></div>
-        <p style={{ fontSize: 13, color: "#666" }}>در FS.com تازه‌واردید؟ <Link href="/login" style={{ color: "#C00000" }}>همین حالا ثبت‌نام کنید</Link></p>
+        <p style={{ fontSize: 13, color: "#666" }}>در FS.com تازه‌واردید؟ <Link href="/login" style={{ color: "var(--red)" }}>همین حالا ثبت‌نام کنید</Link></p>
       </form>
     </div>
   );

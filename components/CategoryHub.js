@@ -159,14 +159,14 @@ export default function CategoryHub({ cat }) {
 }
 
 function Itest() {
-  return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C00000" strokeWidth="1.6"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>;
+  return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style={{ stroke: "var(--red)" }} strokeWidth="1.6"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>;
 }
 function Iproc() {
-  return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C00000" strokeWidth="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>;
+  return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style={{ stroke: "var(--red)" }} strokeWidth="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>;
 }
 function Ibox() {
-  return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C00000" strokeWidth="1.6"><path d="M4 8l8-4 8 4-8 4z"/><path d="M4 8v8l8 4 8-4V8"/></svg>;
+  return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style={{ stroke: "var(--red)" }} strokeWidth="1.6"><path d="M4 8l8-4 8 4-8 4z"/><path d="M4 8v8l8 4 8-4V8"/></svg>;
 }
 function Igear() {
-  return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C00000" strokeWidth="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>;
+  return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style={{ stroke: "var(--red)" }} strokeWidth="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>;
 }

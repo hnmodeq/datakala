@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import Section from "./Section";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [ok, setOk] = useState(false);
   return (
     <footer className="footer">
+      <Section id="footer">
       <div className="container f-grid">
         <div>
           <h4>درباره ما</h4>
@@ -69,6 +71,9 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      </Section>
+
+      <Section id="subfooter">
       <div className="f-pay">
         <div className="container">
           <div className="pay">
@@ -77,6 +82,9 @@ export default function Footer() {
           <div className="f-region">ایران / تومان</div>
         </div>
       </div>
+      </Section>
+
+      <Section id="subfooter2">
       <div className="f-legal">
         <div className="container">
           <div>
@@ -92,6 +100,7 @@ export default function Footer() {
           <div>حق نشر © ۲۰۰۹–۲۰۲۶ متعلق به FS.COM Inc. تمامی حقوق محفوظ است</div>
         </div>
       </div>
+      </Section>
     </footer>
   );
 }

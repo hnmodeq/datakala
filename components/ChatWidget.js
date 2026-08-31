@@ -19,17 +19,17 @@ export default function ChatWidget() {
           <div className="chat-h">گفتگوی زنده FS <button onClick={() => setOpen(false)}>×</button></div>
           <div className="chat-b">
             {msgs.map((m, i) => (
-              <div key={i} className="bubble" style={m.me ? { background: "#fff5f5" } : undefined}>
+              <div key={i} className="bubble" style={m.me ? { background: "var(--red-soft)" } : undefined}>
                 {m.t}{" "}
                 {!m.me && i === msgs.length - 1 && i > 0 && (
-                  <><Link href="/c/switches" style={{ color: "#C00000" }}>سوئیچ‌ها</Link> / <Link href="/c/transceivers" style={{ color: "#C00000" }}>اپتیک</Link></>
+                  <><Link href="/c/switches" style={{ color: "var(--red)" }}>سوئیچ‌ها</Link> / <Link href="/c/transceivers" style={{ color: "var(--red)" }}>اپتیک</Link></>
                 )}
               </div>
             ))}
           </div>
           <form className="chat-f" onSubmit={send}>
             <input value={v} onChange={(e) => setV(e.target.value)} placeholder="پیام خود را بنویسید..." />
-            <button type="submit" style={{ width: 48, color: "#C00000", fontWeight: 700 }}>ارسال</button>
+            <button type="submit" style={{ width: 48, color: "var(--red)", fontWeight: 700 }}>ارسال</button>
           </form>
         </div>
       )}

@@ -2,8 +2,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { PRODUCTS } from "@/lib/data";
+import SectionTitle from "./SectionTitle";
 
-export default function HomeCarousel({ title, ids, pageSize = 4 }) {
+export default function HomeCarousel({ id, fallbackTitle, ids, pageSize = 4 }) {
   const [page, setPage] = useState(0);
   const items = ids.map((id) => PRODUCTS.find((p) => p.id === id)).filter(Boolean);
   const pages = Math.max(1, Math.ceil(items.length / pageSize));
@@ -11,7 +12,7 @@ export default function HomeCarousel({ title, ids, pageSize = 4 }) {
   return (
     <section className="home-sec">
       <div className="container">
-        <h2 className="sec-title">{title}</h2>
+        <SectionTitle id={id} fallback={fallbackTitle} />
         <div className="home-prod-row">
           {slice.map((p) => (
             <Link className="home-p" href={`/products/${p.id}`} key={p.id}>

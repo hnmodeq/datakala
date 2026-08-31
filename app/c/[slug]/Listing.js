@@ -23,7 +23,7 @@ export default function Listing({ cat, products }) {
         <div className="f-block">
           <h3>دسته‌بندی</h3>
           {CATEGORIES.map((c) => (
-            <label key={c.id}><Link href={`/c/${c.id}`} style={{ fontWeight: c.id === cat.id ? 700 : 400, color: c.id === cat.id ? "#C00000" : undefined }}>{c.name}</Link></label>
+            <label key={c.id}><Link href={`/c/${c.id}`} style={{ fontWeight: c.id === cat.id ? 700 : 400, color: c.id === cat.id ? "var(--red)" : undefined }}>{c.name}</Link></label>
           ))}
         </div>
         <div className="f-block">
