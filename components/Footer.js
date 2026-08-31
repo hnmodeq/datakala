@@ -11,41 +11,40 @@ export default function Footer() {
         <div>
           <h4>درباره ما</h4>
           <Link href="/about">نمای کلی</Link>
-          <Link href="/about">انبار جهانی</Link>
-          <Link href="/about">مرکز تحقیق و توسعه پیشرفته</Link>
-          <Link href="/about">کنترل کیفیت</Link>
-          <Link href="/about">مرکز انطباق</Link>
-          <Link href="/about">مرکز تست</Link>
+          <Link href="/services/shipping">انبار جهانی</Link>
+          <Link href="/about/why-fs">مرکز تحقیق و توسعه پیشرفته</Link>
+          <Link href="/about/why-fs">کنترل کیفیت</Link>
+          <Link href="/about/why-fs">مرکز انطباق</Link>
+          <Link href="/about/why-fs">مرکز تست</Link>
+          <Link href="/about/manufacturing">مرکز تولید</Link>
           <Link href="/contact">تماس با ما</Link>
-          <Link href="/about">بازخورد خود را بفرستید</Link>
         </div>
         <div>
           <h4>خدمات</h4>
           <Link href="/support">روش‌های پرداخت</Link>
-          <Link href="/support">راهنمای ارسال</Link>
+          <Link href="/services/shipping">راهنمای ارسال</Link>
           <Link href="/support">حساب تجاری</Link>
-          <Link href="/software">مالیات فروش</Link>
-          <Link href="/about">شرایط اعتباری Net</Link>
           <Link href="/support">سیاست بازگشت</Link>
           <Link href="/support">گارانتی محصول</Link>
+          <Link href="/services">مشاوره راه‌حل</Link>
         </div>
         <div>
           <h4>منابع</h4>
-          <Link href="/support">مستندات</Link>
-          <Link href="/support">سازگاری</Link>
-          <Link href="/about">صوت و تصویر</Link>
-          <Link href="/about">بلاگ FS</Link>
+          <Link href="/docs">مستندات</Link>
+          <Link href="/docs">واژه‌نامه</Link>
+          <Link href="/video">صوت و تصویر</Link>
+          <Link href="/blog">بلاگ FS</Link>
           <Link href="/about">مطالعات موردی</Link>
         </div>
         <div>
           <h4>پشتیبانی</h4>
           <Link href="/support">سؤالات متداول و مرکز راهنما</Link>
-          <Link href="/contact">مشاوره راه‌حل</Link>
+          <Link href="/services">مشاوره راه‌حل</Link>
           <Link href="/support">تست کیفیت</Link>
-          <Link href="/software">چک‌لیست ماژول Wi-Fi</Link>
+          <Link href="/docs">چک‌لیست ماژول WDM</Link>
           <Link href="/about">تأیید محصولات</Link>
           <Link href="/support">پیگیری سفارش من</Link>
-          <Link href="/support">RMA / بازگشت کالا</Link>
+          <Link href="/support">چک‌لیست RMA</Link>
         </div>
         <div className="f-touch">
           <h4>در ارتباط بمانید</h4>
@@ -59,10 +58,7 @@ export default function Footer() {
           </form>
           <div className="apps">
             <div className="apps-label">دانلود اپلیکیشن FS</div>
-            <div className="app-btns">
-              <span>Google Play</span>
-              <span>App Store</span>
-            </div>
+            <div className="app-btns"><span>Google Play</span><span>App Store</span></div>
           </div>
           <div className="social">
             <a href="#" aria-label="LinkedIn">in</a>
@@ -76,7 +72,7 @@ export default function Footer() {
       <div className="f-pay">
         <div className="container">
           <div className="pay">
-            <span>Visa</span><span>Mastercard</span><span>PayPal</span><span>Amex</span><span>Discover</span>
+            <span>Visa</span><span>Mastercard</span><span>PayPal</span><span>DigiCert</span><span>TrustedSite</span>
           </div>
           <div className="f-region">ایران / تومان</div>
         </div>

@@ -81,7 +81,7 @@ export default function Header() {
             </div>
             {["solutions", "services", "resources"].map((key) => (
               <div className="nav-dd" key={key}>
-                <Link className={"nav-link" + (path.startsWith("/" + key) ? " active" : "")} href={"/" + (key === "services" ? "contact" : key === "resources" ? "support" : "solutions")}>
+                <Link className={"nav-link" + (path.startsWith("/" + key) ? " active" : "")} href={"/" + (key === "services" ? "services" : key === "resources" ? "docs" : "solutions")}>
                   {NAV_LABELS[key]}
                 </Link>
                 <div className="nav-fly">

@@ -16,7 +16,7 @@ export default function Solutions() {
         <div className="container">
           <div className="sol-grid" style={{ gridTemplateColumns: "repeat(2, minmax(0,1fr))" }}>
             {SOLUTIONS.map((s) => (
-              <Link className="media-card" href="/software" key={s.title}>
+              <Link className="media-card" href={s.title.includes("VXLAN") ? "/solutions/evpn" : s.title.includes("1.6T") || s.title.includes("800G") ? "/solutions/ai" : "/software"} key={s.title}>
                 <img src={s.img} alt="" style={{ height: 220 }} />
                 <div className="body"><h3>{s.title}</h3><p>{s.text}</p></div>
               </Link>
