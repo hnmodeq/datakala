@@ -8,7 +8,11 @@ export const metadata = {
   title: "دیتاکالا | زیرساخت هوش مصنوعی، دیتاسنتر، شبکه سازمانی و نرم‌افزار",
   description: "سوئیچ، ماژول نوری، کابل‌کشی و نرم‌افزار PicOS® برای شبکه‌های هوش مصنوعی، دیتاسنتر و سازمان.",
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }, { url: "/favicon.ico" }],
+    icon: [
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+    ],
     apple: "/apple-icon.png",
   },
 };
