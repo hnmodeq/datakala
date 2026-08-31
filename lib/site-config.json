@@ -64,11 +64,6 @@
       "label": "همه محصولات"
     },
     {
-      "kind": "dropdown",
-      "key": "services",
-      "label": "خدمات"
-    },
-    {
       "kind": "link",
       "label": "تماس با ما",
       "href": "/contact"
@@ -246,7 +241,7 @@
     "certificates": false,
     "blog": false,
     "contacts": true,
-    "footer": true,
+    "footer": false,
     "subfooter": false,
     "subfooter2": true
   },
