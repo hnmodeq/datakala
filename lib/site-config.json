@@ -288,8 +288,8 @@
     }
   },
   "widgets": {
-    "contact": true,
-    "chat": true
+    "contact": false,
+    "chat": false
   },
   "font": null
 }
