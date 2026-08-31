@@ -1,18 +1,21 @@
 "use client";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { CATEGORIES } from "@/lib/data";
 import { MEGA } from "@/lib/mega";
 
 export default function CategoryExplorer({ initial = "switches" }) {
   const [active, setActive] = useState(initial);
-  const t = useRef();
+  const [page, setPage] = useState(0);
   const cat = CATEGORIES.find((c) => c.id === active) || CATEGORIES[0];
   const families = MEGA[active] || cat.families || [];
+  const pageSize = 4;
+  const pages = Math.max(1, Math.ceil(families.length / pageSize));
+  const slice = families.slice(page * pageSize, page * pageSize + pageSize);
 
   const enter = (id) => {
-    clearTimeout(t.current);
     setActive(id);
+    setPage(0);
   };
 
   return (
@@ -20,43 +23,42 @@ export default function CategoryExplorer({ initial = "switches" }) {
       <div className="container">
         <div className="cat-icons">
           {CATEGORIES.map((c) => (
-            <Link
+            <button
               key={c.id}
-              href={`/c/${c.id}`}
               className={"qcat" + (c.id === active ? " on" : "")}
               onMouseEnter={() => enter(c.id)}
-              onFocus={() => enter(c.id)}
+              onClick={() => enter(c.id)}
+              type="button"
             >
               <img src={c.icon} alt="" />
               <span>{c.name}</span>
-            </Link>
+            </button>
           ))}
         </div>
-        <div className="cat-panel" onMouseEnter={() => clearTimeout(t.current)}>
-          <div className="cat-grid">
-            {families.map((f) => (
-              <article className="cat-card" key={f.name}>
-                <Link href={f.href}><img src={f.img} alt={f.name} /></Link>
+        <div className="cat-panel">
+          <div className="home-cat-grid">
+            {slice.map((f) => (
+              <article className="home-cat-card" key={f.name}>
+                <Link href={f.href} className="home-cat-img"><img src={f.img} alt={f.name} /></Link>
                 <h3><Link href={f.href}>{f.name}</Link></h3>
                 <ul>
-                  {f.links.map((l) => {
+                  {(f.links || []).slice(0, 5).map((l) => {
                     const label = typeof l === "string" ? l : l.label;
-                    const badge = typeof l === "string" ? null : l.badge;
                     return (
-                      <li key={label}>
-                        <Link href={f.href}>
-                          {label}
-                          {badge === "New" && <span className="mbadge new">New</span>}
-                          {badge === "Hot" && <span className="mbadge hot">Hot</span>}
-                        </Link>
-                      </li>
+                      <li key={label}><Link href={f.href}>{label}</Link></li>
                     );
                   })}
                 </ul>
-                <Link className="more" href={f.href}>View all →</Link>
               </article>
             ))}
           </div>
+          {pages > 1 && (
+            <div className="dots">
+              {Array.from({ length: pages }).map((_, i) => (
+                <button key={i} className={i === page ? "on" : ""} onClick={() => setPage(i)} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

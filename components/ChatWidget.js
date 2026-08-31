@@ -33,7 +33,7 @@ export default function ChatWidget() {
           </form>
         </div>
       )}
-      <button className="chat-btn" onClick={() => setOpen((o) => !o)} title="Live chat">
+      <button className="chat-btn quiet" onClick={() => setOpen((o) => !o)} title="Live chat">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 6h14v10H8l-3 3V6z"/></svg>
       </button>
     </div>

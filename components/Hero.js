@@ -18,7 +18,7 @@ export default function Hero() {
             <div className="hero-copy">
               <h2>{s.title}</h2>
               <p>{s.sub}</p>
-              <span className="btn btn-red">Learn more →</span>
+              <span className="btn btn-hero">Learn more</span>
             </div>
           </Link>
         ))}
