@@ -1,13 +1,12 @@
 /* ===== Datakala Control Panel ===== */
 /* Vertical tab pinned to the LEFT edge of the screen */
 .cp-fab{position:fixed;top:50%;left:0;transform:translateY(-50%);z-index:190;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  background:#111827;color:#fff;border:0;cursor:pointer;
-  padding:14px 9px;border-radius:0 12px 12px 0;
-  box-shadow:0 8px 24px rgba(0,0,0,.3);transition:background .15s,padding .15s;
+  display:flex;flex-direction:column;align-items:center;
+  background:#fff;color:var(--ink);border:1px solid var(--line);border-left:0;cursor:pointer;
+  padding:14px 10px;border-radius:0 12px 12px 0;
+  box-shadow:0 4px 16px rgba(0,0,0,.1);transition:background .15s,padding .15s;
   font-family:Vazirmatn,Tahoma,sans-serif}
-.cp-fab:hover{background:#1f2937;padding-right:14px}
-.cp-fab svg{color:var(--red,#C00000)}
+.cp-fab:hover{background:#f6f6f6;padding-right:14px}
 .cp-fab-label{writing-mode:vertical-rl;font-size:12px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
 
 .cp-overlay{position:fixed;inset:0;background:rgba(12,15,20,.5);backdrop-filter:blur(2px);z-index:210;
@@ -181,3 +180,6 @@
 .cp-hero-imgbtn:hover{border-color:var(--red,#C00000);color:var(--red,#C00000)}
 .cp-hero-imgbtn img{width:100%;height:100%;object-fit:cover}
 .cp-hero-card>img{display:none}
+
+.cp-field{margin-bottom:10px}
+.cp-field label{display:block;font-size:12px;color:#888;margin-bottom:4px}

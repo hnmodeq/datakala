@@ -197,8 +197,9 @@ button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padd
 .info h3{margin:0 0 4px;font-size:15px}
 .info p{margin:0;font-size:13px;color:var(--muted-2)}
 
-.footer{background:#fff;color:var(--muted);padding:48px 0 0;font-size:13px;border-top:1px solid var(--line);margin-top:8px}
-.f-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:28px}
+.footer{background:#fff;color:var(--muted);font-size:13px}
+.f-grid-wrap{border-top:1px solid var(--line);padding:48px 0}
+.f-grid{display:grid;gap:28px}
 .footer h4{color:var(--ink);margin:0 0 14px;font-size:14px;font-weight:700}
 .footer a{display:block;padding:4px 0;color:var(--muted)}
 .footer a:hover{color:var(--red)}
@@ -213,14 +214,21 @@ button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padd
 .app-btns span{border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:11px}
 .social{display:flex;gap:8px;margin-top:16px}
 .social a{width:28px;height:28px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);font-size:11px}
-.f-pay{border-top:1px solid var(--line);margin-top:36px;padding:14px 0}
+.f-pay{border-top:1px solid var(--line);padding:14px 0}
 .f-pay .container{display:flex;justify-content:space-between;align-items:center}
 .pay{display:flex;gap:8px;flex-wrap:wrap}
 .pay span{border:1px solid var(--line);border-radius:4px;padding:3px 8px;font-size:11px;color:var(--muted)}
 .f-region{font-size:12px;color:var(--muted)}
-.f-legal{border-top:1px solid var(--line);padding:14px 0 20px;font-size:12px;color:var(--muted-2)}
-.f-legal .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.f-legal a{display:inline;padding:0 10px 0 0;color:var(--muted-2)}
+.f-legal{border-top:1px solid var(--line);padding:16px 0 20px;font-size:11px;color:var(--muted-2)}
+.f-legal-grid{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.f-legal-grid p{margin:0;line-height:1.8}
+.f-copy{text-align:right}
+.f-designer{text-align:left}
+.f-legal a{display:inline;padding:0}
+.f-company{font-weight:600;color:#0ea5e9}
+.f-company:hover{color:#0284c7}
+.f-designer-link{font-weight:600;color:#f5b301}
+.f-designer-link:hover{color:#d99e00}
 
 .crumbs{font-size:13px;color:var(--muted);padding:16px 0 8px}
 .crumbs a:hover{color:var(--red)}
@@ -341,7 +349,7 @@ button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padd
 .hl li{padding:4px 14px 4px 0}
 .hl li:before{left:auto;right:0}
 .mbadge{margin-left:0;margin-right:4px}
-.f-legal a{padding:0 0 0 10px}
+@media (max-width:760px){.f-legal-grid{flex-direction:column;align-items:center}.f-copy,.f-designer{text-align:center}}
 .p-card .price s{margin-left:0;margin-right:6px}
 
 .hub-hero{position:relative;min-height:320px;background-size:cover;background-position:center;color:#fff;display:flex;align-items:center}

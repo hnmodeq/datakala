@@ -174,10 +174,6 @@ export default function ControlPanel() {
   return (
     <>
       <button className="cp-fab" onClick={() => setOpen((o) => !o)} aria-label="کنترل پنل" title="کنترل پنل">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="12" cy="12" r="3" />
-          <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12" />
-        </svg>
         <span className="cp-fab-label">کنترل پنل</span>
       </button>
 
@@ -448,17 +444,38 @@ export default function ControlPanel() {
                   <label className="cp-row"><span className="cp-switch"><input type="checkbox" checked={footer.social} onChange={() => setFooter((f) => ({ ...f, social: !f.social }))} /><i /></span><span className="cp-row-label">شبکه‌های اجتماعی</span></label>
                   <label className="cp-row"><span className="cp-switch"><input type="checkbox" checked={footer.apps} onChange={() => setFooter((f) => ({ ...f, apps: !f.apps }))} /><i /></span><span className="cp-row-label">CTA دانلود اپلیکیشن</span></label>
 
-                  <div className="cp-group-title" style={{ marginTop: 16 }}>زیر پاورقی ۲ (نوار کپی‌رایت)</div>
-                  <input className="cp-text-input" value={subFooter2.copyright || ""} placeholder="متن کپی‌رایت" onChange={(e) => setSubFooter2((s) => ({ ...s, copyright: e.target.value }))} />
-                  <div style={{ marginTop: 10 }}>
-                    {(subFooter2.links || []).map((l, i) => (
-                      <div className="cp-linkrow" key={i}>
-                        <input className="cp-text-input" value={l.label} placeholder="عنوان" onChange={(e) => setSubFooter2((s) => ({ ...s, links: s.links.map((x, k) => k === i ? { ...x, label: e.target.value } : x) }))} />
-                        <input className="cp-text-input" value={l.href} placeholder="لینک" dir="ltr" onChange={(e) => setSubFooter2((s) => ({ ...s, links: s.links.map((x, k) => k === i ? { ...x, href: e.target.value } : x) }))} />
-                        <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => setSubFooter2((s) => ({ ...s, links: s.links.filter((_, k) => k !== i) }))}>✕</button>
-                      </div>
-                    ))}
-                    <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => setSubFooter2((s) => ({ ...s, links: [...(s.links || []), { label: "لینک جدید", href: "#" }] }))}>+ افزودن لینک</button>
+                  <div className="cp-group-title" style={{ marginTop: 16 }}>نوار کپی‌رایت (۲ بخش)</div>
+
+                  <div className="cp-title-label" style={{ marginTop: 4 }}>بخش ۱ — کپی‌رایت</div>
+                  <div className="cp-field">
+                    <label>متن قبل از نام شرکت</label>
+                    <input className="cp-text-input" value={subFooter2.copyright || ""} onChange={(e) => setSubFooter2((s) => ({ ...s, copyright: e.target.value }))} />
+                  </div>
+                  <div className="cp-field">
+                    <label>نام شرکت</label>
+                    <input className="cp-text-input" value={subFooter2.companyName || ""} onChange={(e) => setSubFooter2((s) => ({ ...s, companyName: e.target.value }))} />
+                  </div>
+                  <div className="cp-field">
+                    <label>لینک شرکت</label>
+                    <input className="cp-text-input" dir="ltr" value={subFooter2.companyHref || ""} onChange={(e) => setSubFooter2((s) => ({ ...s, companyHref: e.target.value }))} />
+                  </div>
+                  <div className="cp-field">
+                    <label>متن بعد از نام شرکت</label>
+                    <input className="cp-text-input" value={subFooter2.copyrightSuffix || ""} onChange={(e) => setSubFooter2((s) => ({ ...s, copyrightSuffix: e.target.value }))} />
+                  </div>
+
+                  <div className="cp-title-label" style={{ marginTop: 12 }}>بخش ۲ — طراح</div>
+                  <div className="cp-field">
+                    <label>عبارت طراح</label>
+                    <input className="cp-text-input" value={subFooter2.designerText || ""} onChange={(e) => setSubFooter2((s) => ({ ...s, designerText: e.target.value }))} />
+                  </div>
+                  <div className="cp-field">
+                    <label>نام طراح</label>
+                    <input className="cp-text-input" value={subFooter2.designerName || ""} onChange={(e) => setSubFooter2((s) => ({ ...s, designerName: e.target.value }))} />
+                  </div>
+                  <div className="cp-field">
+                    <label>لینک طراح</label>
+                    <input className="cp-text-input" dir="ltr" value={subFooter2.designerHref || ""} onChange={(e) => setSubFooter2((s) => ({ ...s, designerHref: e.target.value }))} />
                   </div>
                 </div>
               )}
