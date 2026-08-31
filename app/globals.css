@@ -1,10 +1,20 @@
+@font-face{font-family:Vazirmatn;src:url("/fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Vazirmatn;src:url("/fonts/Vazirmatn-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:Vazirmatn;src:url("/fonts/Vazirmatn-SemiBold.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:Vazirmatn;src:url("/fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:Kalameh;src:url("/fonts/Kalameh-Regular.woff2") format("woff2"),url("/fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Kalameh;src:url("/fonts/Kalameh-Medium.woff2") format("woff2"),url("/fonts/Vazirmatn-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:Kalameh;src:url("/fonts/Kalameh-SemiBold.woff2") format("woff2"),url("/fonts/Vazirmatn-SemiBold.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:Kalameh;src:url("/fonts/Kalameh-Bold.woff2") format("woff2"),url("/fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+
 :root{
   --red:#C00000; --red-h:#A80000; --ink:#19191A; --ink-2:#333; --muted:#666;
   --muted-2:#8A8A8A; --line:#E8E8E8; --line-2:#F0F0F0; --bg:#F6F7F9; --white:#fff;
   --shadow:0 8px 28px rgba(0,0,0,.08); --radius:6px; --max:1280px;
-  --font:"Segoe UI","PingFang SC","Helvetica Neue",Arial,sans-serif;
+  --font:Kalameh, Vazirmatn, Tahoma, "Segoe UI", Arial, sans-serif;
 }
-*{box-sizing:border-box} html,body{margin:0} body{font-family:var(--font);color:var(--ink);background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box} html,body{margin:0} html{direction:rtl}
+body{font-family:var(--font);color:var(--ink);background:#fff;line-height:1.8;text-align:right;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none} img{max-width:100%;display:block} button,input,select,textarea{font-family:inherit}
 button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padding:0}
 .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
@@ -77,7 +87,7 @@ button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padd
 .nav-fly a:hover{background:#fafafa;color:var(--red)}
 
 .hero{position:relative;background:#0b1220;overflow:hidden}
-.hero-track{display:flex;transition:transform .6s ease}
+.hero-track{display:flex;transition:transform .6s ease;direction:ltr}
 .hero-slide{min-width:100%;height:380px;position:relative}
 .hero-slide img{width:100%;height:100%;object-fit:cover}
 .hero-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 max(40px, calc((100% - var(--max))/2 + 20px));color:#fff;background:linear-gradient(90deg,rgba(8,12,24,.55),rgba(8,12,24,.12) 48%,transparent 70%)}
@@ -149,7 +159,8 @@ button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padd
 .p-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
 .p-card .thumb{height:150px;display:grid;place-items:center;margin-bottom:10px}
 .p-card .thumb img{max-height:140px;object-fit:contain}
-.p-card .sku{font-size:12px;color:var(--muted);margin:0 0 4px}
+.p-card .sku,.home-p-sku,.sku{font-size:12px;color:var(--muted);margin:0 0 4px;direction:ltr;unicode-bidi:isolate;text-align:inherit}
+.home-p-sku{font-size:14px;font-weight:700;margin-bottom:6px;color:inherit}
 .p-card h3{margin:0 0 8px;font-size:13px;font-weight:600;line-height:1.4;min-height:36px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .p-card .price{color:var(--red);font-weight:700;font-size:16px;margin-top:auto}
 .p-card .price s{color:var(--muted-2);font-weight:400;font-size:12px;margin-left:6px}
@@ -305,3 +316,31 @@ button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padd
   .cat-icons,.cert-grid{grid-template-columns:repeat(2,1fr)}
   .cat-grid,.soft-grid,.sol-grid,.stats,.f-grid{grid-template-columns:1fr}
 }
+
+/* RTL tweaks */
+.logo-link{margin-right:0;margin-inline-end:12px}
+.header-acts{margin-left:0;margin-inline-start:auto}
+.mega-cats button{text-align:right}
+.home-cat-card h3{text-align:right}
+.hero-copy{direction:rtl;background:linear-gradient(-90deg,rgba(8,12,24,.55),rgba(8,12,24,.12) 48%,transparent 70%);align-items:flex-start;text-align:right}
+.hero-copy h2,.hero-copy p{margin-inline-end:auto}
+.page-hero p{margin-inline-end:auto}
+.badge{right:auto;left:2px}
+.search input{border-radius:0 4px 4px 0;border-right:1px solid #d0d0d0;border-left:0}
+.search button{border-radius:4px 0 0 4px}
+.search-suggest{left:52px;right:0}
+.sub-row input{border-radius:0 4px 4px 0;border-right:1px solid #ddd;border-left:0}
+.sub-row button{border-radius:4px 0 0 4px}
+.drop-menu{left:auto;right:0}
+.right-drop .drop-menu{right:auto;left:0}
+.nav-fly{left:auto;right:0}
+.mini-cart{right:auto;left:0}
+.toast{right:auto;left:20px}
+.chat{right:auto;left:20px}
+.chat-panel{right:auto;left:0}
+.tag{left:auto;right:10px}
+.hl li{padding:4px 14px 4px 0}
+.hl li:before{left:auto;right:0}
+.mbadge{margin-left:0;margin-right:4px}
+.f-legal a{padding:0 0 0 10px}
+.p-card .price s{margin-left:0;margin-right:6px}

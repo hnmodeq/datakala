@@ -19,32 +19,32 @@ export default function Listing({ cat, products }) {
   return (
     <div className="container layout">
       <aside className="filters">
-        <h3>Filter</h3>
+        <h3>فیلتر</h3>
         <div className="f-block">
-          <h3>Category</h3>
+          <h3>دسته‌بندی</h3>
           {CATEGORIES.map((c) => (
             <label key={c.id}><Link href={`/c/${c.id}`} style={{ fontWeight: c.id === cat.id ? 700 : 400, color: c.id === cat.id ? "#C00000" : undefined }}>{c.name}</Link></label>
           ))}
         </div>
         <div className="f-block">
-          <h3>Price</h3>
-          {[["all", "All"], ["50", "Under US$50"], ["200", "Under US$200"], ["1000", "Under US$1,000"]].map(([v, l]) => (
+          <h3>قیمت</h3>
+          {[["all", "همه"], ["50", "کمتر از ۵۰ دلار"], ["200", "کمتر از ۲۰۰ دلار"], ["1000", "کمتر از ۱٬۰۰۰ دلار"]].map(([v, l]) => (
             <label key={v}><input type="radio" name="pr" checked={max === v} onChange={() => setMax(v)} /> {l}</label>
           ))}
         </div>
         <div className="f-block">
-          <h3>Availability</h3>
-          <label><input type="checkbox" defaultChecked /> In Stock</label>
+          <h3>موجودی</h3>
+          <label><input type="checkbox" defaultChecked /> موجود در انبار</label>
         </div>
       </aside>
       <div>
         <div className="toolbar">
-          <span>{list.length} products</span>
+          <span>{list.length} محصول</span>
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
-            <option value="pop">Best Selling</option>
-            <option value="new">Newest</option>
-            <option value="pl">Price: Low to High</option>
-            <option value="ph">Price: High to Low</option>
+            <option value="pop">پرفروش‌ترین</option>
+            <option value="new">جدیدترین</option>
+            <option value="pl">قیمت: کم به زیاد</option>
+            <option value="ph">قیمت: زیاد به کم</option>
           </select>
         </div>
         {cat.families?.length > 0 && (
@@ -58,7 +58,7 @@ export default function Listing({ cat, products }) {
           </div>
         )}
         <div className="list-grid">
-          {list.length ? list.map((p) => <ProductCard key={p.id} p={p} />) : <div className="empty" style={{ gridColumn: "1/-1" }}>No products in this filter.</div>}
+          {list.length ? list.map((p) => <ProductCard key={p.id} p={p} />) : <div className="empty" style={{ gridColumn: "1/-1" }}>محصولی در این فیلتر نیست.</div>}
         </div>
       </div>
     </div>

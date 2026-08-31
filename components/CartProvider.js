@@ -22,7 +22,7 @@ export function CartProvider({ children }) {
         return f ? prev.map((x) => x.id === id ? { ...x, qty: x.qty + qty } : x) : [...prev, { id, qty }];
       });
       const p = getProduct(id);
-      setToast(`${p?.sku || "Item"} added to cart`);
+      setToast(`${p?.sku || "کالا"} به سبد اضافه شد`);
       setTimeout(() => setToast(""), 2200);
     },
     setQty(id, qty) {

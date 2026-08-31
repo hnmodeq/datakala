@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import { CATEGORIES, PRODUCTS, money } from "@/lib/data";
-import { MEGA, NAV_MENUS } from "@/lib/mega";
+import { MEGA, NAV_MENUS, NAV_LABELS } from "@/lib/mega";
 import { useCart } from "./CartProvider";
 
 function Flag() {
@@ -15,7 +15,8 @@ function Flag() {
 
 function Badge({ kind }) {
   if (!kind) return null;
-  return <span className={"mbadge " + (kind === "New" ? "new" : "hot")}>{kind}</span>;
+  const label = kind === "New" ? "جدید" : "پرفروش";
+  return <span className={"mbadge " + (kind === "New" ? "new" : "hot")}>{label}</span>;
 }
 
 export default function Header() {
@@ -49,20 +50,20 @@ export default function Header() {
       <div className="topbar">
         <div className="container">
           <div className="top-left">
-            <span>FS United States</span>
+            <span>FS ایران</span>
             <span className="top-sep">|</span>
-            <span className="top-ship">FREE SHIPPING on Orders Over US$79</span>
+            <span className="top-ship">ارسال رایگان برای سفارش‌های بالای ۷۹ دلار آمریکا</span>
           </div>
           <div className="top-right">
-            <Link href="/contact">Contact Us</Link>
+            <Link href="/contact">تماس با ما</Link>
             <div className="drop right-drop">
-              <button>United States / $ USD <span className="caret" /></button>
+              <button>ایران / تومان <span className="caret" /></button>
               <div className="drop-menu">
-                <a href="#"><Flag /> United States / USD</a>
-                <a href="#">🇩🇪 Germany / EUR</a>
-                <a href="#">🇬🇧 United Kingdom / GBP</a>
-                <a href="#">🇦🇺 Australia / AUD</a>
-                <a href="#">🇸🇬 Singapore / SGD</a>
+                <a href="#"><Flag /> ایالات متحده / دلار</a>
+                <a href="#">🇩🇪 آلمان / یورو</a>
+                <a href="#">🇬🇧 بریتانیا / پوند</a>
+                <a href="#">🇦🇺 استرالیا / دلار استرالیا</a>
+                <a href="#">🇸🇬 سنگاپور / دلار سنگاپور</a>
               </div>
             </div>
           </div>
@@ -71,48 +72,48 @@ export default function Header() {
 
       <div className="header-bar">
         <div className="container header-row">
-          <button className="mobile-toggle" onClick={() => setNavOpen((v) => !v)} aria-label="Menu">☰</button>
+          <button className="mobile-toggle" onClick={() => setNavOpen((v) => !v)} aria-label="منو">☰</button>
           <Link href="/" className="logo-link"><Logo /></Link>
 
           <nav className={"main-nav" + (navOpen ? " open" : "")}>
             <div className="nav-item" onMouseEnter={showMega} onMouseLeave={hideMega}>
-              <button className={"nav-link all-products" + (mega ? " open" : "")}>All Products</button>
+              <button className={"nav-link all-products" + (mega ? " open" : "")}>همه محصولات</button>
             </div>
             {["solutions", "services", "resources"].map((key) => (
               <div className="nav-dd" key={key}>
                 <Link className={"nav-link" + (path.startsWith("/" + key) ? " active" : "")} href={"/" + (key === "services" ? "contact" : key === "resources" ? "support" : "solutions")}>
-                  {key[0].toUpperCase() + key.slice(1)}
+                  {NAV_LABELS[key]}
                 </Link>
                 <div className="nav-fly">
                   {NAV_MENUS[key].map((m) => <Link key={m.label} href={m.href}>{m.label}</Link>)}
                 </div>
               </div>
             ))}
-            <Link className={"nav-link" + (path.startsWith("/contact") ? " active" : "")} href="/contact">Contact Us</Link>
+            <Link className={"nav-link" + (path.startsWith("/contact") ? " active" : "")} href="/contact">تماس با ما</Link>
           </nav>
 
           <div className="header-acts">
-            <button className="icon-only" aria-label="Search" onClick={() => setSearchOpen((s) => !s)}>
+            <button className="icon-only" aria-label="جستجو" onClick={() => setSearchOpen((s) => !s)}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
             </button>
             <div className="icon-only wrap" onMouseEnter={() => setMini(true)} onMouseLeave={() => setMini(false)}>
-              <Link href="/cart" className="icon-only" aria-label="Cart">
+              <Link href="/cart" className="icon-only" aria-label="سبد خرید">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
                 {count > 0 && <i className="badge">{count}</i>}
               </Link>
               {mini && (
                 <div className="mini-cart">
-                  {lined.length === 0 ? <div className="empty" style={{ padding: 16 }}>Cart is empty</div> : lined.map(({ p, qty }) => (
+                  {lined.length === 0 ? <div className="empty" style={{ padding: 16 }}>سبد خرید خالی است</div> : lined.map(({ p, qty }) => (
                     <div className="row" key={p.id}>
                       <img src={p.img} alt="" />
-                      <div style={{ flex: 1 }}><b>{p.sku}</b><div>Qty {qty} · {money(p.price * qty)}</div></div>
+                      <div style={{ flex: 1 }}><b>{p.sku}</b><div>تعداد {qty} · {money(p.price * qty)}</div></div>
                     </div>
                   ))}
-                  <Link href="/cart" className="btn btn-red" style={{ width: "100%", justifyContent: "center", marginTop: 10 }}>View cart</Link>
+                  <Link href="/cart" className="btn btn-red" style={{ width: "100%", justifyContent: "center", marginTop: 10 }}>مشاهده سبد</Link>
                 </div>
               )}
             </div>
-            <Link className="icon-only" href="/login" aria-label="Account">
+            <Link className="icon-only" href="/login" aria-label="حساب کاربری">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
             </Link>
           </div>
@@ -121,8 +122,8 @@ export default function Header() {
         {searchOpen && (
           <div className="search-bar">
             <form className="container search" onSubmit={(e) => { e.preventDefault(); router.push("/search?q=" + encodeURIComponent(q)); setSearchOpen(false); setSug([]); }}>
-              <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by keyword, SKU or Item#" />
-              <button type="submit" aria-label="Search">
+              <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="جستجو با کلیدواژه، SKU یا شماره کالا" />
+              <button type="submit" aria-label="جستجو">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
               </button>
               {sug.length > 0 && (

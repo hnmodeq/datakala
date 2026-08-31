@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { SOLUTIONS } from "@/lib/data";
 
-export const metadata = { title: "Solutions - FS.com" };
+export const metadata = { title: "راه‌حل‌ها - دیتاکالا" };
 
 export default function Solutions() {
   return (
     <>
       <section className="page-hero">
         <div className="container">
-          <h1>Feature Solutions</h1>
-          <p>Validated architectures for AI fabrics, cloud data centers, campus networks and optical DCI — designed, tested and delivered by FS.</p>
+          <h1>راه‌حل‌های شاخص</h1>
+          <p>معماری‌های اعتبارسنجی‌شده برای فابریک هوش مصنوعی، دیتاسنتر ابری، شبکه‌های پردیس و DCI نوری — طراحی، تست و تحویل توسط FS.</p>
         </div>
       </section>
       <section className="section">

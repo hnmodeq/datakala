@@ -10,7 +10,7 @@ export default function BuyBox({ p }) {
   const variants = byCat(p.cat).slice(0, 4);
   return (
     <>
-      <div style={{ fontSize: 13, color: "#666", marginBottom: 6 }}>Products:</div>
+      <div style={{ fontSize: 13, color: "#666", marginBottom: 6 }}>محصولات:</div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
         {variants.map((v) => (
           <Link key={v.id} href={`/products/${v.id}`}>
@@ -19,17 +19,17 @@ export default function BuyBox({ p }) {
         ))}
       </div>
       <div className="qty-row">
-        <span style={{ fontSize: 13, fontWeight: 600 }}>Qty</span>
+        <span style={{ fontSize: 13, fontWeight: 600 }}>تعداد</span>
         <div className="qty">
           <button onClick={() => setQty((q) => Math.max(1, q - 1))}>−</button>
           <input value={qty} readOnly />
           <button onClick={() => setQty((q) => q + 1)}>+</button>
         </div>
-        <span style={{ fontSize: 12, color: "#888" }}>{p.stock} available</span>
+        <span style={{ fontSize: 12, color: "#888" }}>{p.stock} عدد موجود</span>
       </div>
       <div className="pdp-acts">
-        <button className="btn btn-red" onClick={() => add(p.id, qty)}>Add to Cart</button>
-        <Link className="btn btn-dark" href="/contact">Contact Sales</Link>
+        <button className="btn btn-red" onClick={() => add(p.id, qty)}>افزودن به سبد</button>
+        <Link className="btn btn-dark" href="/contact">تماس با فروش</Link>
       </div>
     </>
   );

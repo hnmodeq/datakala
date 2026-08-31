@@ -9,18 +9,18 @@ export default function Home() {
     <>
       <Hero />
       <CategoryExplorer />
-      <HomeCarousel title="New Products" ids={NEW_IDS.slice(0, 8)} />
-      <HomeCarousel title="Recommended" ids={REC_IDS.slice(0, 8)} />
+      <HomeCarousel title="محصولات جدید" ids={NEW_IDS.slice(0, 8)} />
+      <HomeCarousel title="پیشنهادی" ids={REC_IDS.slice(0, 8)} />
 
       <section className="home-sec">
         <div className="container">
-          <h2 className="sec-title">PicOS Software Platform</h2>
+          <h2 className="sec-title">پلتفرم نرم‌افزاری PicOS</h2>
           <div className="media-4">
             {[
-              ["/images/20240430173548qy7u9s.jpg.webp", "PicOS Switch Software", "Disaggregated NOS built on industry-standard Debian Linux seamlessly integrates into any network environment."],
-              ["/images/202506261502180ob1d8.jpg.webp", "AmpCon Management Platform", "Deploy, orchestrate, and manage data center and campus networks at scale with automated workflows."],
-              ["/images/20240430173548o0beem.jpg.webp", "PicOS-V Virtual Operating System", "Prototype network ops, validate configuration, and test features with PicOS-V to familiarize users with PicOS® software."],
-              ["/images/20240430173548d45zvm.jpg.webp", "Software Customized", "Further software customization and enhancements to meet your exact requirements."],
+              ["/images/20240430173548qy7u9s.jpg.webp", "نرم‌افزار سوئیچ PicOS", "سیستم‌عامل شبکه جداشده بر پایه Debian لینوکس استاندارد صنعت که به‌سادگی در هر محیط شبکه‌ای یکپارچه می‌شود."],
+              ["/images/202506261502180ob1d8.jpg.webp", "پلتفرم مدیریت AmpCon", "شبکه‌های دیتاسنتر و پردیس را در مقیاس بالا با گردش‌کار خودکار مستقر، هماهنگ و مدیریت کنید."],
+              ["/images/20240430173548o0beem.jpg.webp", "سیستم‌عامل مجازی PicOS-V", "عملیات شبکه را شبیه‌سازی کنید، پیکربندی را اعتبارسنجی کنید و قابلیت‌ها را با PicOS-V بیازمایید تا کاربران با نرم‌افزار PicOS® آشنا شوند."],
+              ["/images/20240430173548d45zvm.jpg.webp", "نرم‌افزار سفارشی", "سفارشی‌سازی و بهبود بیشتر نرم‌افزار مطابق با نیاز دقیق شما."],
             ].map(([img, t, d]) => (
               <Link className="media-card" href="/software" key={t}>
                 <img src={img} alt={t} />
@@ -33,7 +33,7 @@ export default function Home() {
 
       <section className="home-sec">
         <div className="container">
-          <h2 className="sec-title">Feature Solutions</h2>
+          <h2 className="sec-title">راه‌حل‌های شاخص</h2>
           <div className="media-4">
             {SOLUTIONS.slice(0, 4).map((s) => (
               <Link className="media-card" href="/solutions" key={s.title}>
@@ -47,19 +47,19 @@ export default function Home() {
 
       <section className="home-sec">
         <div className="container">
-          <h2 className="sec-title">FS Certified</h2>
+          <h2 className="sec-title">گواهی‌شده توسط FS</h2>
           <div className="cert-grid">
             {[
-              ["/images/20251205121407ozphuu.svg", "Service Professionals", "900+ sales and technical professionals provide customized IT solutions to help meet complex business challenges."],
-              ["/images/202512041628125s5yyl.svg", "Global Delivery Excellence", "7 Local Warehouses guarantee that 90% of orders will be shipped on the same day."],
-              ["/images/20251204162812okueog.svg", "Real-Time Support", "FS provides whole process from pre-sales, in-sales to after-sales support."],
-              ["/images/20251204162812ko3zlo.svg", "Customizable R&D", "FS Advanced R&D Center customizes software and hardware according to your requirements."],
-              ["/images/20251204162812zeli7n.svg", "Comprehensive Test", "8 top testing labs conduct comprehensive testing for your products and solutions."],
-              ["/images/20251204162812mn2i7p.svg", "Certified Quality", "FS products have earned numerous international certifications such as ISO, CE, RoHS, etc."],
+              ["/images/20251205121407ozphuu.svg", "متخصصان خدمات", "بیش از ۹۰۰ متخصص فروش و فنی، راه‌حل‌های فناوری اطلاعات سفارشی برای چالش‌های پیچیده کسب‌وکار ارائه می‌کنند."],
+              ["/images/202512041628125s5yyl.svg", "برتری در ارسال جهانی", "۷ انبار محلی تضمین می‌کنند که ۹۰٪ سفارش‌ها در همان روز ارسال شوند."],
+              ["/images/20251204162812okueog.svg", "پشتیبانی لحظه‌ای", "FS کل فرآیند از پیش‌فروش تا حین فروش و پس از فروش را پشتیبانی می‌کند."],
+              ["/images/20251204162812ko3zlo.svg", "تحقیق و توسعه قابل سفارشی‌سازی", "مرکز تحقیق و توسعه پیشرفته FS نرم‌افزار و سخت‌افزار را مطابق نیاز شما سفارشی می‌کند."],
+              ["/images/20251204162812zeli7n.svg", "تست جامع", "۸ آزمایشگاه برتر، محصولات و راه‌حل‌های شما را به‌صورت جامع می‌آزمایند."],
+              ["/images/20251204162812mn2i7p.svg", "کیفیت گواهی‌شده", "محصولات FS گواهی‌های بین‌المللی متعددی مانند ISO، CE، RoHS و غیره را کسب کرده‌اند."],
             ].map(([img, t, d]) => (
               <Link className="cert" href="/about" key={t}>
                 <img src={img} alt="" />
-                <h3>{t} <span className="chev">›</span></h3>
+                <h3>{t} <span className="chev">‹</span></h3>
                 <p>{d}</p>
               </Link>
             ))}
@@ -69,12 +69,12 @@ export default function Home() {
 
       <section className="home-sec">
         <div className="container">
-          <h2 className="sec-title">Case Studies</h2>
+          <h2 className="sec-title">مطالعات موردی</h2>
           <div className="case-grid">
             {[
-              ["/images/20240629103850kymtvo.png", "United States", "FS Helps an Autonomous Vehicle Startup to Build a Data Center Network", "Enterprise Data Center  |  Autonomous Driving"],
-              ["/images/20240629103850pixlsb.jpg", "Germany", "Dream Chip Improves Network Stability with FS MLAG Solution", "Enterprise Data Center  |  Manufacturing"],
-              ["/images/20240629103850zdlu9m.png", "Japan", "Seamless Entertainment Industry Network Upgrades with FS VXLAN Solution", "Data Center Interconnect  |  Sports, Media and Entertainment"],
+              ["/images/20240629103850kymtvo.png", "ایالات متحده", "FS به یک استارتاپ خودرو خودران در ساخت شبکه دیتاسنتر کمک کرد", "دیتاسنتر سازمانی  |  رانندگی خودران"],
+              ["/images/20240629103850pixlsb.jpg", "آلمان", "Dream Chip پایداری شبکه را با راه‌حل MLAG شرکت FS بهبود داد", "دیتاسنتر سازمانی  |  تولید"],
+              ["/images/20240629103850zdlu9m.png", "ژاپن", "ارتقای یکپارچه شبکه صنعت سرگرمی با راه‌حل VXLAN شرکت FS", "اتصال بین‌دیتاسنتری  |  ورزش، رسانه و سرگرمی"],
             ].map(([img, loc, t, tags]) => (
               <Link className="case" href="/about" key={t}>
                 <img src={img} alt="" />
@@ -91,11 +91,11 @@ export default function Home() {
 
       <section className="home-sec last">
         <div className="container">
-          <h2 className="sec-title">Get more Information</h2>
+          <h2 className="sec-title">اطلاعات بیشتر بگیرید</h2>
           <div className="info-grid">
-            <Link className="info" href="/contact"><img src="/images/20251204162824r6935v.svg" alt="" /><div><h3>Project Inquiry <span className="chev">›</span></h3><p>Customized technical support to meet different requests.</p></div></Link>
-            <Link className="info" href="/contact"><img src="/images/20251204162824fbn9xq.svg" alt="" /><div><h3>Contact Sales <span className="chev">›</span></h3><p>Contact our sales team for products and solutions inquiries.</p></div></Link>
-            <Link className="info" href="/support"><img src="/images/20251204162824bn64ca.svg" alt="" /><div><h3>Online Chat <span className="chev">›</span></h3><p>Chat with our live agent for general inquiries now.</p></div></Link>
+            <Link className="info" href="/contact"><img src="/images/20251204162824r6935v.svg" alt="" /><div><h3>استعلام پروژه <span className="chev">‹</span></h3><p>پشتیبانی فنی سفارشی برای درخواست‌های مختلف.</p></div></Link>
+            <Link className="info" href="/contact"><img src="/images/20251204162824fbn9xq.svg" alt="" /><div><h3>تماس با فروش <span className="chev">‹</span></h3><p>برای استعلام محصولات و راه‌حل‌ها با تیم فروش ما تماس بگیرید.</p></div></Link>
+            <Link className="info" href="/support"><img src="/images/20251204162824bn64ca.svg" alt="" /><div><h3>گفتگوی آنلاین <span className="chev">‹</span></h3><p>همین حالا با کارشناس زنده برای پرسش‌های عمومی گفتگو کنید.</p></div></Link>
           </div>
         </div>
       </section>

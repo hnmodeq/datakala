@@ -9,9 +9,9 @@ export default function CartPage() {
   const sub = lined.reduce((a, i) => a + i.p.price * i.qty, 0);
   return (
     <div className="container" style={{ paddingTop: 20 }}>
-      <h1 style={{ fontSize: 24, margin: "8px 0 18px" }}>Shopping Cart</h1>
+      <h1 style={{ fontSize: 24, margin: "8px 0 18px" }}>سبد خرید</h1>
       {!lined.length ? (
-        <div className="empty">Your cart is empty. <Link href="/" style={{ color: "#C00000" }}>Continue shopping</Link></div>
+        <div className="empty">سبد خرید شما خالی است. <Link href="/" style={{ color: "#C00000" }}>ادامه خرید</Link></div>
       ) : (
         <div className="cart-wrap">
           <div>
@@ -21,7 +21,7 @@ export default function CartPage() {
                 <div>
                   <div className="sku" style={{ fontSize: 12, color: "#888" }}>{p.sku}</div>
                   <h3><Link href={`/products/${p.id}`}>{p.name}</Link></h3>
-                  <button onClick={() => remove(p.id)} style={{ fontSize: 12, color: "#C00000", marginTop: 6 }}>Remove</button>
+                  <button onClick={() => remove(p.id)} style={{ fontSize: 12, color: "#C00000", marginTop: 6 }}>حذف</button>
                 </div>
                 <div className="qty">
                   <button onClick={() => setQty(p.id, qty - 1)}>−</button>
@@ -33,12 +33,12 @@ export default function CartPage() {
             ))}
           </div>
           <aside className="summary">
-            <h3>Order Summary</h3>
-            <div className="sum-row"><span>Subtotal</span><span>{money(sub)}</span></div>
-            <div className="sum-row"><span>Shipping</span><span>Calculated at checkout</span></div>
-            <div className="sum-row total"><span>Total</span><span>{money(sub)}</span></div>
-            <button className="btn btn-red" style={{ width: "100%", justifyContent: "center", marginTop: 14 }} onClick={() => alert("Demo checkout — order not placed.")}>Checkout</button>
-            <p style={{ fontSize: 12, color: "#888", margin: "12px 0 0" }}>Visa, Mastercard, PayPal, Wire Transfer and Purchase Order accepted.</p>
+            <h3>خلاصه سفارش</h3>
+            <div className="sum-row"><span>جمع جزء</span><span>{money(sub)}</span></div>
+            <div className="sum-row"><span>ارسال</span><span>در تسویه حساب محاسبه می‌شود</span></div>
+            <div className="sum-row total"><span>جمع کل</span><span>{money(sub)}</span></div>
+            <button className="btn btn-red" style={{ width: "100%", justifyContent: "center", marginTop: 14 }} onClick={() => alert("تسویه نمایشی — سفارشی ثبت نشد.")}>تسویه حساب</button>
+            <p style={{ fontSize: 12, color: "#888", margin: "12px 0 0" }}>Visa، Mastercard، PayPal، انتقال بانکی و سفارش خرید پذیرفته می‌شود.</p>
           </aside>
         </div>
       )}

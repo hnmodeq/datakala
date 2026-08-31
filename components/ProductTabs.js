@@ -11,8 +11,8 @@ export default function ProductTabs() {
     <section className="section gray">
       <div className="container">
         <div className="tabs">
-          <button className={tab === "new" ? "on" : ""} onClick={() => setTab("new")}>New Products</button>
-          <button className={tab === "rec" ? "on" : ""} onClick={() => setTab("rec")}>Recommended</button>
+          <button className={tab === "new" ? "on" : ""} onClick={() => setTab("new")}>محصولات جدید</button>
+          <button className={tab === "rec" ? "on" : ""} onClick={() => setTab("rec")}>پیشنهادی</button>
         </div>
         <div className="prod-row">{list.map((p) => <ProductCard key={p.id} p={p} />)}</div>
       </div>

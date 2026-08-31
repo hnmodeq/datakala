@@ -10,7 +10,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const cat = CATEGORIES.find((c) => c.id === slug);
-  return { title: cat ? `${cat.name} - FS.com` : "FS.com" };
+  return { title: cat ? `${cat.name} - دیتاکالا` : "دیتاکالا" };
 }
 
 export default async function CategoryPage({ params }) {
@@ -20,7 +20,7 @@ export default async function CategoryPage({ params }) {
   const products = byCat(cat.id);
   return (
     <>
-      <div className="container crumbs"><Link href="/">Home</Link> / {cat.name}</div>
+      <div className="container crumbs"><Link href="/">خانه</Link> / {cat.name}</div>
       <section className="page-hero" style={{ padding: "36px 0" }}>
         <div className="container">
           <h1>{cat.name}</h1>

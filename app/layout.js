@@ -5,14 +5,14 @@ import ChatWidget from "@/components/ChatWidget";
 import { CartProvider } from "@/components/CartProvider";
 
 export const metadata = {
-  title: "FS | AI Infrastructure, Data Center, Enterprise Networking and Software Solutions",
-  description: "FS high-performance switches, optics, cabling and PicOS® software for AI, data center and enterprise networks.",
+  title: "FS | زیرساخت هوش مصنوعی، دیتاسنتر، شبکه سازمانی و نرم‌افزار",
+  description: "سوئیچ، ماژول نوری، کابل‌کشی و نرم‌افزار PicOS® برای شبکه‌های هوش مصنوعی، دیتاسنتر و سازمان.",
   icons: { icon: "/images/logo.svg" },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="fa" dir="rtl">
       <body>
         <CartProvider>
           <Header />
