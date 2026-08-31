@@ -30,7 +30,16 @@ const DEFAULT_FOOTER = {
   social: config.footer ? config.footer.social !== false : true,
   apps: config.footer ? config.footer.apps !== false : true,
 };
-const DEFAULT_SUBFOOTER2 = config.subFooter2 || { copyright: "", links: [] };
+const DEFAULT_SUBFOOTER2 = {
+  copyright: "تمامی حقوق برای",
+  companyName: "دیتاکالا",
+  companyHref: "/",
+  copyrightSuffix: " محفوظ می‌باشد.",
+  designerText: "طراحی شده توسط",
+  designerName: "",
+  designerHref: "#",
+  ...(config.subFooter2 || {}),
+};
 const DEFAULT_LAYOUT = {
   heroCategoriesRows: 1, newProductsRows: 1, recommendationsRows: 1,
   ...(config.layout || {}),

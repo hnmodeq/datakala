@@ -14,6 +14,7 @@
   },
   "favicon": null,
   "logo": null,
+<<<<<<< HEAD
   "heroSlides": [
     {
       "img": "/uploads/hero-0.jpg",
@@ -220,15 +221,24 @@
     "social": false,
     "apps": false
   },
+=======
+  "heroSlides": null,
+>>>>>>> 6031ff1e782e3699feddd082c742fd2706595097
   "subFooter2": {
-    "copyright": "تمامی حقوق برای دیتاکالا محفوظ میباشد.",
-    "links": []
+    "copyright": "تمامی حقوق برای",
+    "companyName": "دیتاکالا",
+    "companyHref": "/",
+    "copyrightSuffix": " محفوظ می‌باشد.",
+    "designerText": "طراحی شده توسط",
+    "designerName": "",
+    "designerHref": "#"
   },
   "layout": {
     "heroCategoriesRows": 2,
     "newProductsRows": 2,
     "recommendationsRows": 2
   },
+<<<<<<< HEAD
   "sections": {
     "topbar": false,
     "header": true,
@@ -282,5 +292,9 @@
       "weight": 600
     }
   },
+=======
+  "sections": {},
+  "sectionTitles": {},
+>>>>>>> 6031ff1e782e3699feddd082c742fd2706595097
   "font": null
 }

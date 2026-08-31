@@ -80,7 +80,12 @@ function sanitizeSubFooter2(input) {
   if (!input || typeof input !== "object") return undefined;
   return {
     copyright: sanitizeStr(input.copyright, 300),
-    links: Array.isArray(input.links) ? input.links.slice(0, 30).map((l) => ({ label: sanitizeStr(l.label, 120), href: sanitizeStr(l.href, 200) || "#" })) : [],
+    companyName: sanitizeStr(input.companyName, 120),
+    companyHref: sanitizeStr(input.companyHref, 200) || "#",
+    copyrightSuffix: sanitizeStr(input.copyrightSuffix, 120),
+    designerText: sanitizeStr(input.designerText, 120),
+    designerName: sanitizeStr(input.designerName, 120),
+    designerHref: sanitizeStr(input.designerHref, 200) || "#",
   };
 }
 function sanitizeLayout(input) {
