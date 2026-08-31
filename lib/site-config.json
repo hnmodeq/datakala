@@ -230,9 +230,9 @@
     "links": []
   },
   "layout": {
-    "heroCategoriesRows": 1,
-    "newProductsRows": 1,
-    "recommendationsRows": 1
+    "heroCategoriesRows": 2,
+    "newProductsRows": 2,
+    "recommendationsRows": 2
   },
   "sections": {
     "topbar": false,
