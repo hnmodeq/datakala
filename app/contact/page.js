@@ -32,7 +32,7 @@ export default function Contact() {
             {ok && <p style={{ color: "var(--success)", fontSize: 14, marginTop: 10 }}>استعلام ارسال شد (نسخه نمایشی). مهندس فروش پیگیری می‌کند.</p>}
           </form>
           <div>
-            <h2>گفتگو با FS</h2>
+            <h2>گفتگو با دیتاکالا</h2>
             <p style={{ color: "var(--muted)" }}>دفتر مرکزی ایالات متحده · 380 Centerpoint Blvd, New Castle, DE</p>
             <p><b>1-888-468-9910</b></p>
             <p style={{ color: "var(--muted)" }}>تیم‌های محلی در آلمان، بریتانیا، استرالیا، سنگاپور، ژاپن و چین.</p>

@@ -9,7 +9,7 @@ export default function Support() {
       <section className="page-hero">
         <div className="container">
           <h1>مرکز راهنما</h1>
-          <p>مستندات، RMA، دانلود و پشتیبانی فنی ۲۴ ساعته برای سخت‌افزار FS و نرم‌افزار PicOS®.</p>
+          <p>مستندات، RMA، دانلود و پشتیبانی فنی ۲۴ ساعته برای سخت‌افزار دیتاکالا و نرم‌افزار PicOS®.</p>
         </div>
       </section>
       <section className="section">
@@ -21,7 +21,7 @@ export default function Support() {
           </div>
           <form className="auth" style={{ maxWidth: 640, margin: "36px auto 0" }} onSubmit={(e) => { e.preventDefault(); setOk(true); }}>
             <h1>پیگیری سفارش</h1>
-            <p style={{ color: "var(--muted)", fontSize: 13 }}>شماره سفارش FS یا شناسه پیگیری را وارد کنید.</p>
+            <p style={{ color: "var(--muted)", fontSize: 13 }}>شماره سفارش دیتاکالا یا شناسه پیگیری را وارد کنید.</p>
             <div className="field"><label>شماره سفارش</label><input placeholder="FS20260831…" required /></div>
             <button className="btn btn-red" type="submit">پیگیری</button>
             {ok && <p style={{ marginTop: 12, fontSize: 14, color: "var(--success)" }}>نسخه نمایشی: سفارش در انبار دلاور بسته‌بندی شد · آماده تحویل به حامل همان‌روز.</p>}

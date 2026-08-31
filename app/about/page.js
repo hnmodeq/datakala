@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { WHY_FS } from "@/lib/hubs";
 
-export const metadata = { title: "درباره FS - دیتاکالا" };
+export const metadata = { title: "درباره دیتاکالا - دیتاکالا" };
 
 export default function About() {
   return (
@@ -9,7 +9,7 @@ export default function About() {
       <section className="hub-hero" style={{ backgroundImage: "url(/images/20251230115848cad4ei.jpg)" }}>
         <div className="container">
           <div className="hub-hero-copy">
-            <div className="kicker">درباره FS</div>
+            <div className="kicker">درباره دیتاکالا</div>
             <h1>طراحی شبکه سازمانی را ساده کنید.</h1>
             <p>با به چالش کشیدن وضعیت موجود با پلتفرم یکپارچه و نوآوری مداوم، راه‌حل‌هایی ارائه می‌دهیم که اتصالات حیاتی را در دیتاسنتر، سازمان، SMB و مخابرات ساده می‌کنند.</p>
           </div>
@@ -28,7 +28,7 @@ export default function About() {
       <section className="home-sec">
         <div className="container">
           <h2 className="sec-title">شکستن سد پیچیدگی</h2>
-          <p className="sec-lead">با معماری ساده‌شده و نرم‌افزار یکپارچه، FS مانع عملیاتی را حذف می‌کند و کارایی مورد نیاز شبکه هوشمند فردا را می‌رساند.</p>
+          <p className="sec-lead">با معماری ساده‌شده و نرم‌افزار یکپارچه، دیتاکالا مانع عملیاتی را حذف می‌کند و کارایی مورد نیاز شبکه هوشمند فردا را می‌رساند.</p>
           <div className="why-grid" style={{ gridTemplateColumns: "repeat(3,1fr)" }}>
             {WHY_FS.map((w) => (
               <Link className="why-card" href={w.href} key={w.t}>

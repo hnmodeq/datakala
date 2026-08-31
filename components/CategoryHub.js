@@ -37,8 +37,8 @@ export default function CategoryHub({ cat }) {
 
       <section className="home-sec gray-sec">
         <div className="container">
-          <h2 className="sec-title">داخل آزمایشگاه‌های FS</h2>
-          <p className="sec-lead">آزمایشگاه‌های FS برخی از گسترده‌ترین و سخت‌گیرانه‌ترین فرآیندهای تست را ترکیب می‌کنند تا کیفیت تضمین شود.</p>
+          <h2 className="sec-title">داخل آزمایشگاه‌های دیتاکالا</h2>
+          <p className="sec-lead">آزمایشگاه‌های دیتاکالا برخی از گسترده‌ترین و سخت‌گیرانه‌ترین فرآیندهای تست را ترکیب می‌کنند تا کیفیت تضمین شود.</p>
           <div className="labs-split">
             <img src={hub.labsImg} alt="" />
             <div className="labs-icons">
@@ -119,9 +119,9 @@ export default function CategoryHub({ cat }) {
           <h2 className="sec-title">موفقیت مشتریان</h2>
           <div className="case-grid">
             {[
-              ["/images/20240629103850kymtvo.png", "ایالات متحده", "FS به یک استارتاپ خودرو خودران در ساخت شبکه دیتاسنتر کمک کرد"],
-              ["/images/20240629103850pixlsb.jpg", "آلمان", "Dream Chip پایداری شبکه را با راه‌حل MLAG شرکت FS بهبود داد"],
-              ["/images/20240629103850zdlu9m.png", "ژاپن", "ارتقای یکپارچه شبکه صنعت سرگرمی با راه‌حل VXLAN شرکت FS"],
+              ["/images/20240629103850kymtvo.png", "ایالات متحده", "دیتاکالا به یک استارتاپ خودرو خودران در ساخت شبکه دیتاسنتر کمک کرد"],
+              ["/images/20240629103850pixlsb.jpg", "آلمان", "Dream Chip پایداری شبکه را با راه‌حل MLAG شرکت دیتاکالا بهبود داد"],
+              ["/images/20240629103850zdlu9m.png", "ژاپن", "ارتقای یکپارچه شبکه صنعت سرگرمی با راه‌حل VXLAN شرکت دیتاکالا"],
             ].map(([img, loc, t]) => (
               <Link className="case" href="/about" key={t}>
                 <img src={img} alt="" />

@@ -44,6 +44,7 @@ const DEFAULT_LAYOUT = {
   heroCategoriesRows: 1, newProductsRows: 1, recommendationsRows: 1,
   ...(config.layout || {}),
 };
+const DEFAULT_WIDGETS = { contact: true, chat: true, ...(config.widgets || {}) };
 
 const DEFAULT_SECTIONS = config.sections || {};
 const DEFAULT_TITLES = config.sectionTitles || {};
@@ -70,6 +71,7 @@ export function ControlProvider({ children }) {
   const [footer, setFooter] = useState(DEFAULT_FOOTER);
   const [subFooter2, setSubFooter2] = useState(DEFAULT_SUBFOOTER2);
   const [layout, setLayout] = useState(DEFAULT_LAYOUT);
+  const [widgets, setWidgets] = useState(DEFAULT_WIDGETS);
   const [sections, setSections] = useState(DEFAULT_SECTIONS);
   const [sectionTitles, setSectionTitles] = useState(DEFAULT_TITLES);
   const [font, setFont] = useState(() => persistedAsset(config.font));
@@ -133,12 +135,13 @@ export function ControlProvider({ children }) {
 
   const api = useMemo(
     () => ({
-      isAdmin, siteName, colors, nav, contacts, footer, subFooter2, layout,
+      isAdmin, siteName, colors, nav, contacts, footer, subFooter2, layout, widgets,
       sections, sectionTitles, font, favicon, logo, heroSlides,
-      setSiteName, setColors, setNav, setContacts, setFooter, setSubFooter2, setLayout,
+      setSiteName, setColors, setNav, setContacts, setFooter, setSubFooter2, setLayout, setWidgets,
       setFont, setFavicon, setLogo, setHeroSlides,
       setColor(key, val) { setColors((c) => ({ ...c, [key]: val })); },
       setSectionTitle(id, patch) { setSectionTitles((t) => ({ ...t, [id]: { ...(t[id] || {}), ...patch } })); },
+      toggleWidget(id) { setWidgets((w) => ({ ...w, [id]: !w[id] })); },
       toggle(id) { setSections((s) => ({ ...s, [id]: !s[id] })); },
       setAll(value) { setSections((s) => { const n = {}; Object.keys(s).forEach((k) => (n[k] = value)); return n; }); },
       reset() {
@@ -149,12 +152,13 @@ export function ControlProvider({ children }) {
         setFooter(DEFAULT_FOOTER);
         setSubFooter2(DEFAULT_SUBFOOTER2);
         setLayout(DEFAULT_LAYOUT);
+        setWidgets(DEFAULT_WIDGETS);
         setSections(DEFAULT_SECTIONS);
         setSectionTitles(DEFAULT_TITLES);
         setFont(null); setFavicon(null); setLogo(null); setHeroSlides(null);
       },
     }),
-    [isAdmin, siteName, colors, nav, contacts, footer, subFooter2, layout, sections, sectionTitles, font, favicon, logo, heroSlides]
+    [isAdmin, siteName, colors, nav, contacts, footer, subFooter2, layout, widgets, sections, sectionTitles, font, favicon, logo, heroSlides]
   );
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;

@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { WHY_FS } from "@/lib/hubs";
 
-export const metadata = { title: "چرا FS - دیتاکالا" };
+export const metadata = { title: "چرا دیتاکالا - دیتاکالا" };
 
 export default function WhyFs() {
   return (
     <>
       <section className="hub-hero" style={{ backgroundImage: "url(/images/20251230115848cad4ei.jpg)", minHeight: 280 }}>
-        <div className="container"><div className="hub-hero-copy"><h1>چرا FS</h1>
-          <p>FS Inc. ارائه‌دهنده مورد اعتماد محصولات و راه‌حل‌های ICT برای مشتریان سازمانی جهان است. با توان تولید، تحقیق و توسعه، تست و مدیریت کیفیت جامع، روی HPC، دیتاسنتر، سازمان و مخابرات تمرکز دارد.</p>
+        <div className="container"><div className="hub-hero-copy"><h1>چرا دیتاکالا</h1>
+          <p>دیتاکالا Inc. ارائه‌دهنده مورد اعتماد محصولات و راه‌حل‌های ICT برای مشتریان سازمانی جهان است. با توان تولید، تحقیق و توسعه، تست و مدیریت کیفیت جامع، روی HPC، دیتاسنتر، سازمان و مخابرات تمرکز دارد.</p>
         </div></div>
       </section>
       <section className="home-sec last">

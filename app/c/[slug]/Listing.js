@@ -28,7 +28,7 @@ export default function Listing({ cat, products }) {
         </div>
         <div className="f-block">
           <h3>قیمت</h3>
-          {[["all", "همه"], ["50", "کمتر از ۵۰ دلار"], ["200", "کمتر از ۲۰۰ دلار"], ["1000", "کمتر از ۱٬۰۰۰ دلار"]].map(([v, l]) => (
+          {[["all", "همه"], ["50", "کمتر از ۵۰ تومان"], ["200", "کمتر از ۲۰۰ تومان"], ["1000", "کمتر از ۱٬۰۰۰ تومان"]].map(([v, l]) => (
             <label key={v}><input type="radio" name="pr" checked={max === v} onChange={() => setMax(v)} /> {l}</label>
           ))}
         </div>

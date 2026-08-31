@@ -53,10 +53,10 @@ function readAsDataUrl(file) {
 
 export default function ControlPanel() {
   const {
-    siteName, colors, nav, contacts, footer, subFooter2, layout,
+    siteName, colors, nav, contacts, footer, subFooter2, layout, widgets,
     sections, sectionTitles, font, favicon, logo, heroSlides,
     setSiteName, setColor, setNav, setContacts, setFooter, setSubFooter2, setLayout,
-    setFont, setFavicon, setLogo, setHeroSlides, setSectionTitle, toggle, setAll, reset,
+    setFont, setFavicon, setLogo, setHeroSlides, setSectionTitle, toggle, toggleWidget, setAll, reset,
   } = useControl();
 
   const [open, setOpen] = useState(false);
@@ -128,7 +128,7 @@ export default function ControlPanel() {
     setStatus({ kind: "busy", text: "در حال اعمال..." });
     try {
       const payload = {
-        siteName, colors, nav, contacts, footer, subFooter2, layout, sections, sectionTitles,
+        siteName, colors, nav, contacts, footer, subFooter2, layout, widgets, sections, sectionTitles,
         font: font ? (font.base64 ? { name: font.name, ext: font.ext, base64: font.base64 } : { keep: true }) : null,
         favicon: favicon ? (favicon.base64 ? { ext: favicon.ext, base64: favicon.base64 } : { keep: true }) : null,
         logo: logo ? (logo.base64 ? { ext: logo.ext, base64: logo.base64 } : { keep: true }) : null,
@@ -301,6 +301,19 @@ export default function ControlPanel() {
                       ))}
                     </div>
                   ))}
+                  <div className="cp-group">
+                    <div className="cp-group-title">ویجت‌های شناور</div>
+                    <label className="cp-row">
+                      <span className="cp-switch"><input type="checkbox" checked={widgets.contact !== false} onChange={() => toggleWidget("contact")} /><i /></span>
+                      <span className="cp-row-label">دکمه تماس (ایمیل)</span>
+                      <code className="cp-key">contact</code>
+                    </label>
+                    <label className="cp-row">
+                      <span className="cp-switch"><input type="checkbox" checked={widgets.chat !== false} onChange={() => toggleWidget("chat")} /><i /></span>
+                      <span className="cp-row-label">دکمه گفتگوی زنده</span>
+                      <code className="cp-key">chat</code>
+                    </label>
+                  </div>
                 </div>
               )}
 

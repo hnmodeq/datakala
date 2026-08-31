@@ -9,7 +9,7 @@ export default function Solutions() {
       <section className="page-hero">
         <div className="container">
           <h1>راه‌حل‌های شاخص</h1>
-          <p>معماری‌های اعتبارسنجی‌شده برای فابریک هوش مصنوعی، دیتاسنتر ابری، شبکه‌های پردیس و DCI نوری — طراحی، تست و تحویل توسط FS.</p>
+          <p>معماری‌های اعتبارسنجی‌شده برای فابریک هوش مصنوعی، دیتاسنتر ابری، شبکه‌های پردیس و DCI نوری — طراحی، تست و تحویل توسط دیتاکالا.</p>
         </div>
       </section>
       <section className="section">

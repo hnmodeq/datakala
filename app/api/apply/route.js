@@ -99,7 +99,7 @@ function sanitizeLayout(input) {
 export async function POST(req) {
   try {
     const body = await req.json().catch(() => ({}));
-    const { sections, sectionTitles, font, favicon, logo, heroSlides, nav, contacts, footer, subFooter2, layout } = body || {};
+    const { sections, sectionTitles, font, favicon, logo, heroSlides, nav, contacts, footer, subFooter2, layout, widgets } = body || {};
     const siteName = typeof body.siteName === "string" ? body.siteName.slice(0, 80) : null;
     const colors = sanitizeColors(body.colors);
     if (!colors.primary) return NextResponse.json({ ok: false, error: "رنگ اصلی نامعتبر است." }, { status: 400 });
@@ -180,6 +180,12 @@ export async function POST(req) {
     if (footer !== undefined) cfg.footer = sanitizeFooter(footer);
     if (subFooter2 !== undefined) cfg.subFooter2 = sanitizeSubFooter2(subFooter2);
     if (layout !== undefined) cfg.layout = sanitizeLayout(layout);
+    if (widgets && typeof widgets === "object") {
+      cfg.widgets = {
+        contact: widgets.contact !== false,
+        chat: widgets.chat !== false,
+      };
+    }
     cfg.sections = cleanSections;
     cfg.sectionTitles = sanitizeTitles(sectionTitles);
 

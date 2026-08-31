@@ -34,8 +34,8 @@ export default function Hero() {
           </Link>
         ))}
       </div>
-      <button className="hero-nav hero-prev" onClick={() => setI((x) => (x - 1 + slides.length) % slides.length)}>‹</button>
-      <button className="hero-nav hero-next" onClick={() => setI((x) => (x + 1) % slides.length)}>›</button>
+      <button className="hero-nav hero-prev" onClick={() => setI((x) => (x - 1 + slides.length) % slides.length)}>›</button>
+      <button className="hero-nav hero-next" onClick={() => setI((x) => (x + 1) % slides.length)}>‹</button>
       <div className="hero-dots">
         {slides.map((_, k) => <button key={k} className={k === i ? "on" : ""} onClick={() => setI(k)} />)}
       </div>

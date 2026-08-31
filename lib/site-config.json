@@ -14,7 +14,6 @@
   },
   "favicon": null,
   "logo": null,
-<<<<<<< HEAD
   "heroSlides": [
     {
       "img": "/uploads/hero-0.jpg",
@@ -174,7 +173,7 @@
             "href": "/video"
           },
           {
-            "label": "بلاگ FS",
+            "label": "بلاگ دیتاکالا",
             "href": "/blog"
           },
           {
@@ -221,9 +220,6 @@
     "social": false,
     "apps": false
   },
-=======
-  "heroSlides": null,
->>>>>>> 6031ff1e782e3699feddd082c742fd2706595097
   "subFooter2": {
     "copyright": "تمامی حقوق برای",
     "companyName": "دیتاکالا",
@@ -238,7 +234,6 @@
     "newProductsRows": 2,
     "recommendationsRows": 2
   },
-<<<<<<< HEAD
   "sections": {
     "topbar": false,
     "header": true,
@@ -277,7 +272,7 @@
       "weight": 600
     },
     "certificates": {
-      "text": "گواهی‌شده توسط FS",
+      "text": "گواهی‌شده توسط دیتاکالا",
       "size": 22,
       "weight": 600
     },
@@ -292,9 +287,9 @@
       "weight": 600
     }
   },
-=======
-  "sections": {},
-  "sectionTitles": {},
->>>>>>> 6031ff1e782e3699feddd082c742fd2706595097
+  "widgets": {
+    "contact": true,
+    "chat": true
+  },
   "font": null
 }

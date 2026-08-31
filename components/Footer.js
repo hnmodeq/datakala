@@ -50,7 +50,7 @@ export default function Footer() {
                 )}
                 {footer.apps && (
                   <div className="apps">
-                    <div className="apps-label">دانلود اپلیکیشن FS</div>
+                    <div className="apps-label">دانلود اپلیکیشن دیتاکالا</div>
                     <div className="app-btns"><span>Google Play</span><span>App Store</span></div>
                   </div>
                 )}

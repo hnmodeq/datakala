@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { PRODUCTS } from "@/lib/data";
+import { PRODUCTS, money } from "@/lib/data";
 import SectionTitle from "./SectionTitle";
 import { useControl } from "./ControlProvider";
+import { useCart } from "./CartProvider";
 
 export default function HomeCarousel({ id, fallbackTitle, ids }) {
   const { layout } = useControl();
+  const { add } = useCart();
   const rowsKey = id === "new-products" ? "newProductsRows" : "recommendationsRows";
   const rows = Math.max(1, Math.min(4, layout[rowsKey] || 1));
   const pageSize = 4 * rows;
@@ -20,11 +22,22 @@ export default function HomeCarousel({ id, fallbackTitle, ids }) {
         <SectionTitle id={id} fallback={fallbackTitle} />
         <div className="home-prod-row">
           {slice.map((p) => (
-            <Link className="home-p" href={`/products/${p.id}`} key={p.id}>
-              <div className="home-p-img"><img src={p.img} alt={p.sku} /></div>
-              <div className="home-p-sku">{p.sku}</div>
-              <div className="home-p-desc">{p.name}</div>
-            </Link>
+            <article className="home-p" key={p.id}>
+              <Link className="home-p-link" href={`/products/${p.id}`}>
+                <div className="home-p-img"><img src={p.img} alt={p.sku} /></div>
+                <div className="home-p-sku">{p.sku}</div>
+                <div className="home-p-desc">{p.name}</div>
+              </Link>
+              <div className="home-p-foot">
+                <div>
+                  <div className="home-p-price">{money(p.price)}</div>
+                  <div className="home-p-sold">{p.sold} فروخته‌شده{p.rating ? ` · ★ ${p.rating}` : ""}</div>
+                </div>
+                <button className="home-p-add" onClick={() => add(p.id)} aria-label="افزودن به سبد">
+                  افزودن به سبد
+                </button>
+              </div>
+            </article>
           ))}
         </div>
         {pages > 1 && (

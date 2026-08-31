@@ -1,12 +1,12 @@
 import { BLOG_POSTS } from "@/lib/hubs";
 
-export const metadata = { title: "بلاگ FS - دیتاکالا" };
+export const metadata = { title: "بلاگ دیتاکالا - دیتاکالا" };
 
 export default function Blog() {
   return (
     <>
       <section className="hub-hero" style={{ backgroundImage: "url(/images/202604081453079w890k.jpg)", minHeight: 220 }}>
-        <div className="container"><div className="hub-hero-copy"><h1>بلاگ FS</h1></div></div>
+        <div className="container"><div className="hub-hero-copy"><h1>بلاگ دیتاکالا</h1></div></div>
       </section>
       <section className="home-sec last">
         <div className="container">
