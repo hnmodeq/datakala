@@ -161,7 +161,7 @@ export async function POST(req) {
           if (!IMG_EXTS.includes(ext) || ext === "ico") return NextResponse.json({ ok: false, error: "فرمت تصویر اسلایدر پشتیبانی نمی‌شود." }, { status: 400 });
           await fs.writeFile(path.join(root, "public", "uploads", `hero-${i}.${ext}`), b64buf(s.base64));
           finalSlides.push({ img: `/uploads/hero-${i}.${ext}`, href: sanitizeStr(s.href, 200) || "#", title: sanitizeStr(s.title, 120), sub: sanitizeStr(s.sub, 200) });
-        } else if (typeof s.img === "string") {
+        } else if (typeof s.img === "string" && s.img) {
           finalSlides.push({ img: s.img, href: sanitizeStr(s.href, 200) || "#", title: sanitizeStr(s.title, 120), sub: sanitizeStr(s.sub, 200) });
         }
       }

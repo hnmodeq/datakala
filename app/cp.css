@@ -175,3 +175,9 @@
 .cp-nav-kind{display:inline-block;font-size:10px;font-weight:700;color:#666;background:#f0f0f0;border-radius:4px;padding:2px 8px;margin-bottom:6px}
 
 .info-ico{width:36px;height:36px;display:grid;place-items:center;color:var(--red,#C00000);font-size:18px}
+
+.cp-hero-imgbtn{width:110px;height:66px;border:1px dashed #ddd;border-radius:8px;background:#fafafa;
+  display:grid;place-items:center;overflow:hidden;cursor:pointer;flex-shrink:0;color:#aaa;font-size:12px;padding:0}
+.cp-hero-imgbtn:hover{border-color:var(--red,#C00000);color:var(--red,#C00000)}
+.cp-hero-imgbtn img{width:100%;height:100%;object-fit:cover}
+.cp-hero-card>img{display:none}
