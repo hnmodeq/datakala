@@ -1,12 +1,13 @@
 export default function Logo({ light = false }) {
   return (
-    <span className="logo" style={{ color: light ? "#fff" : undefined }}>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36" height="36">
-        <circle cx="24" cy="24" r="24" fill="#C00000" />
-        <path fill="#fff" d="M12.4 14.2h15.8c.6 0 1.1.5 1.1 1.1v2.2c0 .6-.5 1.1-1.1 1.1H17.4v3.8h8.8c.6 0 1.1.5 1.1 1.1v2.1c0 .6-.5 1.1-1.1 1.1H17.4V32.6c0 .6-.5 1.1-1.1 1.1h-2.8c-.6 0-1.1-.5-1.1-1.1V15.3c0-.6.5-1.1 1.1-1.1z" />
-        <path fill="#fff" d="M28.2 28.4c0-3.2 2.3-5.3 6.1-5.3 1.7 0 3.1.5 4.2 1.3.4.3.4.8 0 1.2l-1.5 1.4c-.4.3-.9.3-1.2 0-.7-.5-1.4-.7-2.3-.7-1.5 0-2.4.7-2.4 2 0 1.2.9 2 2.4 2 .9 0 1.7-.3 2.4-.7.4-.3.8-.3 1.2 0l1.5 1.3c.4.4.4.9 0 1.2-1.1.9-2.6 1.4-4.4 1.4-3.9.1-6-2.1-6-5.1z" />
-      </svg>
-      FS
+    <span className="logo">
+      <img
+        className="logo-img"
+        src={light ? "/brand/datakala-wordmark-white.png" : "/brand/datakala-wordmark.png"}
+        alt="دیتاکالا"
+        width={160}
+        height={54}
+      />
     </span>
   );
 }
