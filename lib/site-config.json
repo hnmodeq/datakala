@@ -2,96 +2,189 @@
   "siteName": "دیتاکالا | فروشگاه تجهیزات دیتاسنتری",
   "colors": {
     "primary": "#e11d48",
-    "heading": "#19191A",
+    "heading": "#19191a",
     "text": "#333333",
     "muted": "#666666",
-    "faded": "#8A8A8A",
-    "border": "#E8E8E8",
-    "background": "#F6F7F9",
-    "star": "#F5A623",
-    "success": "#1A7F37",
-    "accent": "#C45C00"
+    "faded": "#8a8a8a",
+    "border": "#e8e8e8",
+    "background": "#f6f7f9",
+    "star": "#e11d48",
+    "success": "#0052ea",
+    "accent": "#e11d48"
   },
   "favicon": null,
   "logo": null,
   "heroSlides": null,
   "nav": [
-    { "kind": "mega", "label": "همه محصولات" },
-    { "kind": "dropdown", "key": "solutions", "label": "راه‌حل‌ها" },
-    { "kind": "dropdown", "key": "services", "label": "خدمات" },
-    { "kind": "dropdown", "key": "resources", "label": "منابع" },
-    { "kind": "link", "label": "تماس با ما", "href": "/contact" }
+    {
+      "kind": "mega",
+      "label": "همه محصولات"
+    },
+    {
+      "kind": "dropdown",
+      "key": "services",
+      "label": "خدمات"
+    },
+    {
+      "kind": "link",
+      "label": "تماس با ما",
+      "href": "/contact"
+    }
   ],
   "contacts": [
-    { "img": "/images/20251204162824r6935v.svg", "title": "استعلام پروژه", "text": "پشتیبانی فنی سفارشی برای درخواست‌های مختلف.", "href": "/contact" },
-    { "img": "/images/20251204162824fbn9xq.svg", "title": "تماس با فروش", "text": "برای استعلام محصولات و راه‌حل‌ها با تیم فروش ما تماس بگیرید.", "href": "/contact" },
-    { "img": "/images/20251204162824bn64ca.svg", "title": "گفتگوی آنلاین", "text": "همین حالا با کارشناس زنده برای پرسش‌های عمومی گفتگو کنید.", "href": "/support" }
+    {
+      "img": "/images/20251204162824r6935v.svg",
+      "title": "استعلام پروژه",
+      "text": "پشتیبانی فنی سفارشی برای درخواست‌های مختلف.",
+      "href": "/contact"
+    },
+    {
+      "img": "/images/20251204162824fbn9xq.svg",
+      "title": "تماس با فروش",
+      "text": "برای استعلام محصولات و راه‌حل‌ها با تیم فروش ما تماس بگیرید.",
+      "href": "/contact"
+    },
+    {
+      "img": "/images/20251204162824bn64ca.svg",
+      "title": "گفتگوی آنلاین",
+      "text": "همین حالا با کارشناس زنده برای پرسش‌های عمومی گفتگو کنید.",
+      "href": "/support"
+    }
   ],
   "footer": {
     "columns": [
       {
         "title": "درباره ما",
         "links": [
-          { "label": "نمای کلی", "href": "/about" },
-          { "label": "انبار جهانی", "href": "/services/shipping" },
-          { "label": "مرکز تحقیق و توسعه پیشرفته", "href": "/about/why-fs" },
-          { "label": "کنترل کیفیت", "href": "/about/why-fs" },
-          { "label": "مرکز انطباق", "href": "/about/why-fs" },
-          { "label": "مرکز تست", "href": "/about/why-fs" },
-          { "label": "مرکز تولید", "href": "/about/manufacturing" },
-          { "label": "تماس با ما", "href": "/contact" }
+          {
+            "label": "نمای کلی",
+            "href": "/about"
+          },
+          {
+            "label": "انبار جهانی",
+            "href": "/services/shipping"
+          },
+          {
+            "label": "مرکز تحقیق و توسعه پیشرفته",
+            "href": "/about/why-fs"
+          },
+          {
+            "label": "کنترل کیفیت",
+            "href": "/about/why-fs"
+          },
+          {
+            "label": "مرکز انطباق",
+            "href": "/about/why-fs"
+          },
+          {
+            "label": "مرکز تست",
+            "href": "/about/why-fs"
+          },
+          {
+            "label": "مرکز تولید",
+            "href": "/about/manufacturing"
+          },
+          {
+            "label": "تماس با ما",
+            "href": "/contact"
+          }
         ]
       },
       {
         "title": "خدمات",
         "links": [
-          { "label": "روش‌های پرداخت", "href": "/support" },
-          { "label": "راهنمای ارسال", "href": "/services/shipping" },
-          { "label": "حساب تجاری", "href": "/support" },
-          { "label": "سیاست بازگشت", "href": "/support" },
-          { "label": "گارانتی محصول", "href": "/support" },
-          { "label": "مشاوره راه‌حل", "href": "/services" }
+          {
+            "label": "روش‌های پرداخت",
+            "href": "/support"
+          },
+          {
+            "label": "راهنمای ارسال",
+            "href": "/services/shipping"
+          },
+          {
+            "label": "حساب تجاری",
+            "href": "/support"
+          },
+          {
+            "label": "سیاست بازگشت",
+            "href": "/support"
+          },
+          {
+            "label": "گارانتی محصول",
+            "href": "/support"
+          },
+          {
+            "label": "مشاوره راه‌حل",
+            "href": "/services"
+          }
         ]
       },
       {
         "title": "منابع",
         "links": [
-          { "label": "مستندات", "href": "/docs" },
-          { "label": "واژه‌نامه", "href": "/docs" },
-          { "label": "صوت و تصویر", "href": "/video" },
-          { "label": "بلاگ FS", "href": "/blog" },
-          { "label": "مطالعات موردی", "href": "/about" }
+          {
+            "label": "مستندات",
+            "href": "/docs"
+          },
+          {
+            "label": "واژه‌نامه",
+            "href": "/docs"
+          },
+          {
+            "label": "صوت و تصویر",
+            "href": "/video"
+          },
+          {
+            "label": "بلاگ FS",
+            "href": "/blog"
+          },
+          {
+            "label": "مطالعات موردی",
+            "href": "/about"
+          }
         ]
       },
       {
         "title": "پشتیبانی",
         "links": [
-          { "label": "سؤالات متداول و مرکز راهنما", "href": "/support" },
-          { "label": "مشاوره راه‌حل", "href": "/services" },
-          { "label": "تست کیفیت", "href": "/support" },
-          { "label": "چک‌لیست ماژول WDM", "href": "/docs" },
-          { "label": "تأیید محصولات", "href": "/about" },
-          { "label": "پیگیری سفارش من", "href": "/support" },
-          { "label": "چک‌لیست RMA", "href": "/support" }
+          {
+            "label": "سؤالات متداول و مرکز راهنما",
+            "href": "/support"
+          },
+          {
+            "label": "مشاوره راه‌حل",
+            "href": "/services"
+          },
+          {
+            "label": "تست کیفیت",
+            "href": "/support"
+          },
+          {
+            "label": "چک‌لیست ماژول WDM",
+            "href": "/docs"
+          },
+          {
+            "label": "تأیید محصولات",
+            "href": "/about"
+          },
+          {
+            "label": "پیگیری سفارش من",
+            "href": "/support"
+          },
+          {
+            "label": "چک‌لیست RMA",
+            "href": "/support"
+          }
         ]
       }
     ],
-    "newsletter": true,
-    "social": true,
-    "apps": true
+    "newsletter": false,
+    "social": false,
+    "apps": false
   },
   "subFooter2": {
-    "copyright": "حق نشر © ۲۰۰۹–۲۰۲۶ متعلق به FS.COM Inc. تمامی حقوق محفوظ است",
-    "links": [
-      { "label": "نقشه سایت", "href": "#" },
-      { "label": "دسترس‌پذیری", "href": "#" },
-      { "label": "سیاست حریم خصوصی", "href": "#" },
-      { "label": "اطلاعیه کوکی", "href": "#" },
-      { "label": "شرایط و ضوابط", "href": "#" },
-      { "label": "گزارش آسیب‌پذیری", "href": "#" },
-      { "label": "سیاست‌های شرکت", "href": "#" },
-      { "label": "تنظیمات کوکی", "href": "#" }
-    ]
+    "copyright": "تمامی حقوق برای دیتاکالا محفوظ میباشد.",
+    "links": []
   },
   "layout": {
     "heroCategoriesRows": 1,
@@ -115,13 +208,41 @@
     "subfooter2": true
   },
   "sectionTitles": {
-    "new-products": { "text": "تجهیزات جدید", "size": 22, "weight": 600 },
-    "recommendations": { "text": "پیشنهادی برای شما", "size": 22, "weight": 600 },
-    "platforms": { "text": "پلتفرم نرم‌افزاری PicOS", "size": 22, "weight": 600 },
-    "solutions": { "text": "راه‌حل‌های شاخص", "size": 22, "weight": 600 },
-    "certificates": { "text": "گواهی‌شده توسط FS", "size": 22, "weight": 600 },
-    "blog": { "text": "مطالعات موردی", "size": 22, "weight": 600 },
-    "contacts": { "text": "با ما در ارتباط باشید", "size": 22, "weight": 600 }
+    "new-products": {
+      "text": "تجهیزات جدید",
+      "size": 22,
+      "weight": 600
+    },
+    "recommendations": {
+      "text": "پیشنهادی برای شما",
+      "size": 22,
+      "weight": 600
+    },
+    "platforms": {
+      "text": "پلتفرم نرم‌افزاری PicOS",
+      "size": 22,
+      "weight": 600
+    },
+    "solutions": {
+      "text": "راه‌حل‌های شاخص",
+      "size": 22,
+      "weight": 600
+    },
+    "certificates": {
+      "text": "گواهی‌شده توسط FS",
+      "size": 22,
+      "weight": 600
+    },
+    "blog": {
+      "text": "مطالعات موردی",
+      "size": 22,
+      "weight": 600
+    },
+    "contacts": {
+      "text": "با ما در ارتباط باشید",
+      "size": 22,
+      "weight": 600
+    }
   },
   "font": null
 }
