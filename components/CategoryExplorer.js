@@ -2,11 +2,13 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { CATEGORIES } from "@/lib/data";
+import { MEGA } from "@/lib/mega";
 
 export default function CategoryExplorer({ initial = "switches" }) {
   const [active, setActive] = useState(initial);
   const t = useRef();
   const cat = CATEGORIES.find((c) => c.id === active) || CATEGORIES[0];
+  const families = MEGA[active] || cat.families || [];
 
   const enter = (id) => {
     clearTimeout(t.current);
@@ -32,14 +34,24 @@ export default function CategoryExplorer({ initial = "switches" }) {
         </div>
         <div className="cat-panel" onMouseEnter={() => clearTimeout(t.current)}>
           <div className="cat-grid">
-            {cat.families.map((f) => (
+            {families.map((f) => (
               <article className="cat-card" key={f.name}>
                 <Link href={f.href}><img src={f.img} alt={f.name} /></Link>
                 <h3><Link href={f.href}>{f.name}</Link></h3>
                 <ul>
-                  {f.links.map((l) => (
-                    <li key={l}><Link href={f.href}>{l}</Link></li>
-                  ))}
+                  {f.links.map((l) => {
+                    const label = typeof l === "string" ? l : l.label;
+                    const badge = typeof l === "string" ? null : l.badge;
+                    return (
+                      <li key={label}>
+                        <Link href={f.href}>
+                          {label}
+                          {badge === "New" && <span className="mbadge new">New</span>}
+                          {badge === "Hot" && <span className="mbadge hot">Hot</span>}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
                 <Link className="more" href={f.href}>View all →</Link>
               </article>

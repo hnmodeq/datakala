@@ -3,7 +3,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
-import { CATEGORIES, PRODUCTS, money, byCat } from "@/lib/data";
+import { CATEGORIES, PRODUCTS, money } from "@/lib/data";
+import { MEGA, NAV_MENUS } from "@/lib/mega";
 import { useCart } from "./CartProvider";
 
 function Flag() {
@@ -12,20 +13,26 @@ function Flag() {
   );
 }
 
+function Badge({ kind }) {
+  if (!kind) return null;
+  return <span className={"mbadge " + (kind === "New" ? "new" : "hot")}>{kind}</span>;
+}
+
 export default function Header() {
   const path = usePathname();
   const router = useRouter();
-  const { count, items, add } = useCart();
+  const { count, items } = useCart();
   const [q, setQ] = useState("");
   const [sug, setSug] = useState([]);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [mega, setMega] = useState(false);
-  const [megaCat, setMegaCat] = useState(CATEGORIES[0].id);
+  const [megaCat, setMegaCat] = useState("switches");
   const [mini, setMini] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const hideT = useRef();
 
   const showMega = () => { clearTimeout(hideT.current); setMega(true); };
-  const hideMega = () => { hideT.current = setTimeout(() => setMega(false), 160); };
+  const hideMega = () => { hideT.current = setTimeout(() => setMega(false), 180); };
 
   useEffect(() => {
     if (!q.trim()) { setSug([]); return; }
@@ -34,54 +41,94 @@ export default function Header() {
   }, [q]);
 
   const cat = CATEGORIES.find((c) => c.id === megaCat) || CATEGORIES[0];
-  const feat = byCat(cat.id).slice(0, 4);
+  const families = MEGA[megaCat] || cat.families || [];
   const lined = items.map((i) => ({ ...i, p: PRODUCTS.find((x) => x.id === i.id) })).filter((x) => x.p);
 
   return (
-    <>
+    <header className="header">
       <div className="topbar">
         <div className="container">
           <div className="top-left">
-            <div className="drop">
-              <button><Flag /> United States <span className="caret" /></button>
-              <div className="drop-menu">
-                <a href="#"><Flag /> United States</a>
-                <a href="#">🇩🇪 Germany</a>
-                <a href="#">🇬🇧 United Kingdom</a>
-                <a href="#">🇦🇺 Australia</a>
-                <a href="#">🇸🇬 Singapore</a>
-                <a href="#">🇯🇵 Japan</a>
-              </div>
-            </div>
-            <div className="drop">
-              <button>English <span className="caret" /></button>
-              <div className="drop-menu">
-                <a href="#">English</a><a href="#">Deutsch</a><a href="#">Español</a><a href="#">Français</a><a href="#">日本語</a>
-              </div>
-            </div>
+            <span>FS United States</span>
+            <span className="top-sep">|</span>
+            <span className="top-ship">FREE SHIPPING on Orders Over US$79</span>
           </div>
           <div className="top-right">
-            <Link href="/support">Help Center</Link>
-            <Link href="/support">Track Order</Link>
-            <Link href="/contact">Contact</Link>
-            <span>1-888-468-9910</span>
+            <Link href="/contact">Contact Us</Link>
+            <div className="drop right-drop">
+              <button>United States / $ USD <span className="caret" /></button>
+              <div className="drop-menu">
+                <a href="#"><Flag /> United States / USD</a>
+                <a href="#">🇩🇪 Germany / EUR</a>
+                <a href="#">🇬🇧 United Kingdom / GBP</a>
+                <a href="#">🇦🇺 Australia / AUD</a>
+                <a href="#">🇸🇬 Singapore / SGD</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <header className="header">
-        <div className="header-main">
-          <div className="container">
-            <button className="mobile-toggle" onClick={() => setNavOpen((v) => !v)} aria-label="Menu">☰</button>
-            <Link href="/"><Logo /></Link>
-            <form className="search" onSubmit={(e) => { e.preventDefault(); router.push("/search?q=" + encodeURIComponent(q)); setSug([]); }}>
-              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by keyword, SKU or Item#" />
+
+      <div className="header-bar">
+        <div className="container header-row">
+          <button className="mobile-toggle" onClick={() => setNavOpen((v) => !v)} aria-label="Menu">☰</button>
+          <Link href="/" className="logo-link"><Logo /></Link>
+
+          <nav className={"main-nav" + (navOpen ? " open" : "")}>
+            <div className="nav-item" onMouseEnter={showMega} onMouseLeave={hideMega}>
+              <button className={"nav-link all-products" + (mega ? " open" : "")}>All Products</button>
+            </div>
+            {["solutions", "services", "resources"].map((key) => (
+              <div className="nav-dd" key={key}>
+                <Link className={"nav-link" + (path.startsWith("/" + key) ? " active" : "")} href={"/" + (key === "services" ? "contact" : key === "resources" ? "support" : "solutions")}>
+                  {key[0].toUpperCase() + key.slice(1)}
+                </Link>
+                <div className="nav-fly">
+                  {NAV_MENUS[key].map((m) => <Link key={m.label} href={m.href}>{m.label}</Link>)}
+                </div>
+              </div>
+            ))}
+            <Link className={"nav-link" + (path.startsWith("/contact") ? " active" : "")} href="/contact">Contact Us</Link>
+          </nav>
+
+          <div className="header-acts">
+            <button className="icon-only" aria-label="Search" onClick={() => setSearchOpen((s) => !s)}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            </button>
+            <div className="icon-only wrap" onMouseEnter={() => setMini(true)} onMouseLeave={() => setMini(false)}>
+              <Link href="/cart" className="icon-only" aria-label="Cart">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+                {count > 0 && <i className="badge">{count}</i>}
+              </Link>
+              {mini && (
+                <div className="mini-cart">
+                  {lined.length === 0 ? <div className="empty" style={{ padding: 16 }}>Cart is empty</div> : lined.map(({ p, qty }) => (
+                    <div className="row" key={p.id}>
+                      <img src={p.img} alt="" />
+                      <div style={{ flex: 1 }}><b>{p.sku}</b><div>Qty {qty} · {money(p.price * qty)}</div></div>
+                    </div>
+                  ))}
+                  <Link href="/cart" className="btn btn-red" style={{ width: "100%", justifyContent: "center", marginTop: 10 }}>View cart</Link>
+                </div>
+              )}
+            </div>
+            <Link className="icon-only" href="/login" aria-label="Account">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+            </Link>
+          </div>
+        </div>
+
+        {searchOpen && (
+          <div className="search-bar">
+            <form className="container search" onSubmit={(e) => { e.preventDefault(); router.push("/search?q=" + encodeURIComponent(q)); setSearchOpen(false); setSug([]); }}>
+              <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by keyword, SKU or Item#" />
               <button type="submit" aria-label="Search">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
               </button>
               {sug.length > 0 && (
                 <div className="search-suggest">
                   {sug.map((p) => (
-                    <Link key={p.id} href={`/products/${p.id}`} onClick={() => setSug([])}>
+                    <Link key={p.id} href={`/products/${p.id}`} onClick={() => { setSug([]); setSearchOpen(false); }}>
                       <img src={p.img} alt="" />
                       <div><b>{p.sku}</b><div style={{ color: "#888", fontSize: 12 }}>{money(p.price)} · {p.name.slice(0, 48)}…</div></div>
                     </Link>
@@ -89,100 +136,45 @@ export default function Header() {
                 </div>
               )}
             </form>
-            <div className="header-acts">
-              <Link className="icon-btn" href="/login">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
-                <span>Account</span>
-              </Link>
-              <Link className="icon-btn" href="/support">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 114 2c0 1.5-2 1.8-2 3"/><circle cx="12" cy="17" r=".8" fill="currentColor"/></svg>
-                <span>Support</span>
-              </Link>
-              <div className="icon-btn" onMouseEnter={() => setMini(true)} onMouseLeave={() => setMini(false)} style={{ position: "relative" }}>
-                <Link href="/cart" className="icon-btn" style={{ padding: 0 }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
-                  <span>Cart</span>
-                  {count > 0 && <i className="badge">{count}</i>}
-                </Link>
-                {mini && (
-                  <div className="mini-cart">
-                    {lined.length === 0 ? <div className="empty" style={{ padding: 16 }}>Cart is empty</div> : lined.map(({ p, qty }) => (
-                      <div className="row" key={p.id}>
-                        <img src={p.img} alt="" />
-                        <div style={{ flex: 1 }}><b>{p.sku}</b><div>Qty {qty} · {money(p.price * qty)}</div></div>
-                      </div>
-                    ))}
-                    <Link href="/cart" className="btn btn-red" style={{ width: "100%", justifyContent: "center", marginTop: 10 }}>View cart</Link>
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
-        </div>
-        <nav className={"nav" + (navOpen ? " open" : "")}>
-          <div className="container">
-            <Link href="/c/switches" className={"nav-link all-products" + (mega ? " open" : "")}
-              onMouseEnter={showMega} onMouseLeave={hideMega}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-              All Products
-            </Link>
-            <div className="nav-dd">
-              <Link className={"nav-link" + (path.startsWith("/solutions") ? " active" : "")} href="/solutions">Solutions</Link>
-              <div className="nav-fly">
-                <Link href="/solutions">Data Center / AI Fabrics</Link>
-                <Link href="/solutions">Enterprise Campus</Link>
-                <Link href="/solutions">400G DCI / OTN</Link>
-                <Link href="/solutions">Cabling Infrastructure</Link>
-                <Link href="/solutions">Wi-Fi 7 Campus</Link>
-              </div>
-            </div>
-            <div className="nav-dd">
-              <Link className={"nav-link" + (path.startsWith("/software") ? " active" : "")} href="/software">Software</Link>
-              <div className="nav-fly">
-                <Link href="/software">PicOS® Switch Software</Link>
-                <Link href="/software">AmpCon-DC</Link>
-                <Link href="/software">AmpCon-Campus</Link>
-                <Link href="/software">PicOS-V (Free Trial)</Link>
-              </div>
-            </div>
-            <div className="nav-dd">
-              <Link className={"nav-link" + (path.startsWith("/support") ? " active" : "")} href="/support">Support</Link>
-              <div className="nav-fly">
-                <Link href="/support">Help Center</Link>
-                <Link href="/support">Track Order</Link>
-                <Link href="/support">Warranty / RMA</Link>
-                <Link href="/contact">Contact Sales</Link>
-              </div>
-            </div>
-            <Link className={"nav-link" + (path.startsWith("/about") ? " active" : "")} href="/about">About FS</Link>
+        )}
 
-            {mega && (
-              <div className="mega" onMouseEnter={showMega} onMouseLeave={hideMega}>
-                <div className="mega-cats">
-                  {CATEGORIES.map((c) => (
-                    <button key={c.id} className={c.id === megaCat ? "active" : ""} onMouseEnter={() => setMegaCat(c.id)}>
-                      {c.name} <span>›</span>
-                    </button>
+        {mega && (
+          <div className="mega-shell" onMouseEnter={showMega} onMouseLeave={hideMega}>
+            <div className="mega">
+              <div className="mega-cats">
+                {CATEGORIES.map((c) => (
+                  <button key={c.id} className={c.id === megaCat ? "active" : ""} onMouseEnter={() => setMegaCat(c.id)}>
+                    <img src={c.icon} alt="" />
+                    <span>{c.name}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="mega-panel">
+                <div className="mega-cols">
+                  {families.map((f) => (
+                    <div className="mega-col" key={f.name}>
+                      <Link href={f.href} className="mega-col-img"><img src={f.img} alt={f.name} /></Link>
+                      <h4><Link href={f.href}>{f.name}</Link></h4>
+                      <ul>
+                        {(f.links || []).map((l) => {
+                          const label = typeof l === "string" ? l : l.label;
+                          const badge = typeof l === "string" ? null : l.badge;
+                          return (
+                            <li key={label}>
+                              <Link href={f.href}>{label} <Badge kind={badge} /></Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
                   ))}
                 </div>
-                <div className="mega-panel">
-                  <h4><Link href={`/c/${cat.id}`}>{cat.name}</Link></h4>
-                  <div className="mega-grid">
-                    {cat.families.flatMap((f) => f.links).slice(0, 18).map((l) => (
-                      <Link key={l} href={`/c/${cat.id}`}>{l}</Link>
-                    ))}
-                  </div>
-                  <div className="mega-feat">
-                    {feat.map((p) => (
-                      <Link key={p.id} href={`/products/${p.id}`}><img src={p.img} alt="" /><span>{p.sku}</span></Link>
-                    ))}
-                  </div>
-                </div>
               </div>
-            )}
+            </div>
           </div>
-        </nav>
-      </header>
-    </>
+        )}
+      </div>
+    </header>
   );
 }
