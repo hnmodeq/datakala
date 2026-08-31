@@ -7,6 +7,7 @@ import ChatWidget from "@/components/ChatWidget";
 import { CartProvider } from "@/components/CartProvider";
 import { ControlProvider } from "@/components/ControlProvider";
 import AdminPanelGate from "@/components/AdminPanelGate";
+import LoadingScreen from "@/components/LoadingScreen";
 import config from "@/lib/site-config.json";
 
 const DEFAULT_ICONS = {
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
       <body>
         <CartProvider>
           <ControlProvider>
+            <LoadingScreen />
             <Header />
             {children}
             <Footer />
