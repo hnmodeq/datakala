@@ -14,7 +14,50 @@
   },
   "favicon": null,
   "logo": null,
-  "heroSlides": null,
+  "heroSlides": [
+    {
+      "img": "/uploads/hero-0.jpg",
+      "href": "/about",
+      "title": "ارسال همان‌روز در آمریکا",
+      "sub": "برای سفارش‌های انبار دلاور که قبل از ساعت ۱۶:۰۰ EST ثبت شوند."
+    },
+    {
+      "img": "/uploads/hero-1.webp",
+      "href": "/software",
+      "title": "سوئیچ‌های دیتاسنتر PicOS®",
+      "sub": "سوئیچ‌های متراکم spine، leaf و ToR برای فابریک هوش مصنوعی و شبکه‌های دیتاسنتر."
+    },
+    {
+      "img": "/uploads/hero-2.jpg",
+      "href": "/solutions",
+      "title": "اتصال نوری 1.6T برای InfiniBand NVIDIA® B300",
+      "sub": "اپتیک 1.6T، کابل‌کشی متراکم و ارتباط کم‌تأخیر GPU."
+    },
+    {
+      "img": "/uploads/hero-3.jpg",
+      "href": "/c/optical",
+      "title": "راه‌حل نوری DCI چهارصد گیگابیت",
+      "sub": "شبکه DCI چهارصد گیگابیت را با سری D7000 بسازید."
+    },
+    {
+      "img": "/uploads/hero-4.jpg",
+      "href": "/solutions",
+      "title": "راه‌حل کابل‌کشی ساختمان و پردیس سازمانی",
+      "sub": "اتصال یکپارچه، زیرساخت مقیاس‌پذیر، مدیریت ساده‌تر."
+    },
+    {
+      "img": "/uploads/hero-5.webp",
+      "href": "/software",
+      "title": "نرم‌افزار مدیریت AmpCon برای شبکه‌های پردیس",
+      "sub": "سریع‌تر مستقر کنید، هوشمندتر بهره‌برداری کنید — از روز صفر تا روز ۲+."
+    },
+    {
+      "img": "/uploads/hero-6.jpeg",
+      "href": "/c/panels",
+      "title": "کابل‌کشی ماژولار چگالی بالا FHD®",
+      "sub": "سرهم‌شده، تست‌شده و پیکربندی‌شده برای استقرار plug & play."
+    }
+  ],
   "nav": [
     {
       "kind": "mega",
