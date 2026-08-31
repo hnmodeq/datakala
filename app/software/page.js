@@ -19,7 +19,7 @@ export default function Software() {
         <div className="container split">
           <div>
             <h2>PicOS® چگونه کار می‌کند</h2>
-            <p style={{ color: "#555" }}>PicOS® به‌طور کامل از سوئیچ‌های Broadcom با پروتکل‌های ضروری لایه ۲/۳ و API تلمتری پشتیبانی می‌کند. AmpCon-DC / Campus عملیات پایدارتر را با هزینه کمتر ممکن می‌سازد.</p>
+            <p style={{ color: "var(--muted)" }}>PicOS® به‌طور کامل از سوئیچ‌های Broadcom با پروتکل‌های ضروری لایه ۲/۳ و API تلمتری پشتیبانی می‌کند. AmpCon-DC / Campus عملیات پایدارتر را با هزینه کمتر ممکن می‌سازد.</p>
             <ul className="hl">
               <li>EVPN-VXLAN و MLAG برای فابریک مقیاس‌پذیر</li>
               <li>راه‌اندازی بدون دخالت دستی از طریق AmpCon</li>

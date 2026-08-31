@@ -37,7 +37,7 @@ export default async function ProductPage({ params }) {
             <span className="stars">★★★★★ {p.rating}</span>
             <span>{p.reviews} دیدگاه · {p.sold} فروخته‌شده</span>
           </div>
-          <div className="pdp-price">{money(p.price)}{p.was ? <s style={{ fontSize: 16, color: "#888", fontWeight: 400 }}> {money(p.was)}</s> : null}</div>
+          <div className="pdp-price">{money(p.price)}{p.was ? <s style={{ fontSize: 16, color: "var(--muted-2)", fontWeight: 400 }}> {money(p.was)}</s> : null}</div>
           <div className="pdp-ship">موجود در انبار · ارسال همان‌روز از انبار دلاور (سفارش قبل از ساعت ۱۶:۰۰ EST)</div>
           <BuyBox p={p} />
           <div className="hl">

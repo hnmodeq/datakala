@@ -22,7 +22,7 @@ export default function Services() {
         <div className="container split">
           <div>
             <h2>چرا خدمات راه‌حل FS</h2>
-            <p style={{ color: "#555" }}>FS به رضایت مشتری با تمرکز بر کیفیت و مدیریت هزینه متعهد است. شبکه جهانی، کارکنان ماهر و موجودی محلی دسترسی را هرجا که نیاز دارید فراهم می‌کند. به ما برای راه‌حل‌های کارآمد و قابل استقرار اعتماد کنید.</p>
+            <p style={{ color: "var(--muted)" }}>FS به رضایت مشتری با تمرکز بر کیفیت و مدیریت هزینه متعهد است. شبکه جهانی، کارکنان ماهر و موجودی محلی دسترسی را هرجا که نیاز دارید فراهم می‌کند. به ما برای راه‌حل‌های کارآمد و قابل استقرار اعتماد کنید.</p>
             <ul className="hl">
               <li>سفارشی‌سازی مطابق نیاز دقیق شما</li>
               <li>مشاوره حرفه‌ای مهندسان فروش و فنی</li>
@@ -51,12 +51,12 @@ export default function Services() {
             <div className="field"><label>ایمیل</label><input type="email" required /></div>
             <div className="field"><label>پیام</label><textarea placeholder="پروژه، مقیاس و بودجه را شرح دهید…" /></div>
             <button className="btn btn-red" type="submit">ارسال</button>
-            {ok && <p style={{ color: "#1a7f37", marginTop: 10 }}>درخواست ارسال شد (نسخه نمایشی).</p>}
+            {ok && <p style={{ color: "var(--success)", marginTop: 10 }}>درخواست ارسال شد (نسخه نمایشی).</p>}
           </form>
           <div>
             <h2>تماس با ما</h2>
             <p><b>۱-۸۸۸-۴۶۸-۹۹۱۰</b></p>
-            <p style={{ color: "#555" }}>کارشناس مشتری ۲۴ ساعته در ۷ روز هفته.</p>
+            <p style={{ color: "var(--muted)" }}>کارشناس مشتری ۲۴ ساعته در ۷ روز هفته.</p>
             <p>ایمیل: sales@example.com</p>
             <p>گفتگوی زنده از هدر سایت.</p>
           </div>

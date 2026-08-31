@@ -3,13 +3,17 @@ import Link from "next/link";
 import { useState } from "react";
 import { CATEGORIES } from "@/lib/data";
 import { MEGA } from "@/lib/mega";
+import { useControl } from "./ControlProvider";
 
 export default function CategoryExplorer({ initial = "switches" }) {
   const [active, setActive] = useState(initial);
   const [page, setPage] = useState(0);
+  const { layout } = useControl();
   const cat = CATEGORIES.find((c) => c.id === active) || CATEGORIES[0];
   const families = MEGA[active] || cat.families || [];
-  const pageSize = 4;
+  const perRow = 4;
+  const rows = Math.max(1, Math.min(4, layout.heroCategoriesRows || 1));
+  const pageSize = perRow * rows;
   const pages = Math.max(1, Math.ceil(families.length / pageSize));
   const slice = families.slice(page * pageSize, page * pageSize + pageSize);
 

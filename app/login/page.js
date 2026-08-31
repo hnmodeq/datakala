@@ -29,13 +29,13 @@ export default function Login() {
         <h1>ورود</h1>
         <div className="field"><label>ایمیل</label><input type="email" required /></div>
         <div className="field">
-          <label>رمز عبور <Link href="/login" style={{ float: "left", fontWeight: 400, color: "#888" }}>رمز را فراموش کرده‌اید؟</Link></label>
+          <label>رمز عبور <Link href="/login" style={{ float: "left", fontWeight: 400, color: "var(--muted-2)" }}>رمز را فراموش کرده‌اید؟</Link></label>
           <input type="password" required />
         </div>
         <button className="btn btn-red" type="submit" style={{ width: "100%", justifyContent: "center" }}>ورود</button>
         <p className="or">یا ورود با روش‌های دیگر</p>
         <div className="oauth"><span>G</span><span>P</span><span>f</span><span>in</span></div>
-        <p style={{ fontSize: 13, color: "#666" }}>در FS.com تازه‌واردید؟ <Link href="/login" style={{ color: "var(--red)" }}>همین حالا ثبت‌نام کنید</Link></p>
+        <p style={{ fontSize: 13, color: "var(--muted)" }}>در FS.com تازه‌واردید؟ <Link href="/login" style={{ color: "var(--red)" }}>همین حالا ثبت‌نام کنید</Link></p>
       </form>
     </div>
   );

@@ -2,8 +2,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useControl } from "./ControlProvider";
 import { darken, tint, isHexColor } from "@/lib/color";
+import { HERO } from "@/lib/data";
 
-const PALETTE = [
+const PRIMARY_PALETTE = [
   "#C00000", "#E11D48", "#DC2626", "#EA580C", "#D97706", "#F59E0B",
   "#84CC16", "#16A34A", "#0D9488", "#0891B2", "#0284C7", "#2563EB",
   "#4F46E5", "#7C3AED", "#9333EA", "#DB2777", "#1F2937", "#111827",
@@ -16,26 +17,30 @@ const SECTION_GROUPS = [
 ];
 
 const LABELS = {
-  topbar: "پیش‌سربرگ (نوار بالا)",
-  header: "سربرگ اصلی",
-  hero: "اسلایدر قهرمان (Hero)",
-  "hero-categories": "دسته‌بندی‌های قهرمان",
-  "new-products": "محصولات جدید",
-  recommendations: "پیشنهادی‌ها",
-  platforms: "پلتفرم‌ها (PicOS)",
-  solutions: "راه‌حل‌ها",
-  certificates: "گواهی‌نامه‌ها",
-  blog: "وبلاگ / مطالعات موردی",
-  contacts: "تماس با ما",
-  footer: "پاورقی",
-  subfooter: "زیر پاورقی (پرداخت/منطقه)",
-  subfooter2: "زیر پاورقی ۲ (حقوقی)",
+  topbar: "پیش‌سربرگ", header: "سربرگ اصلی", hero: "اسلایدر قهرمان", "hero-categories": "دسته‌بندی‌ها",
+  "new-products": "محصولات جدید", recommendations: "پیشنهادی‌ها", platforms: "پلتفرم‌ها", solutions: "راه‌حل‌ها",
+  certificates: "گواهی‌نامه‌ها", blog: "مطالعات موردی", contacts: "تماس با ما", footer: "پاورقی",
+  subfooter: "زیر پاورقی", subfooter2: "زیر پاورقی ۲",
 };
 
 const TITLE_KEYS = ["new-products", "recommendations", "platforms", "solutions", "certificates", "blog", "contacts"];
 const WEIGHTS = [400, 500, 600, 700, 800, 900];
 
+const COLOR_FIELDS = [
+  { key: "primary", label: "رنگ اصلی (قرمز)", css: "--red" },
+  { key: "heading", label: "رنگ عنوان‌ها", css: "--ink" },
+  { key: "text", label: "رنگ متن", css: "--ink-2" },
+  { key: "muted", label: "متن کم‌اهمیت", css: "--muted" },
+  { key: "faded", label: "متن محو", css: "--muted-2" },
+  { key: "border", label: "خطوط و حاشیه", css: "--line" },
+  { key: "background", label: "پس‌زمینه", css: "--bg" },
+  { key: "star", label: "ستاره‌ها", css: "--star" },
+  { key: "success", label: "موفق / موجودی", css: "--success" },
+  { key: "accent", label: "تاکید / نارنجی", css: "--accent" },
+];
+
 const IMG_ACCEPT = ".png,.jpg,.jpeg,.gif,.webp,.svg,.ico";
+const HERO_DEFAULTS = HERO.map((s) => ({ img: s.img, href: s.href, title: s.title, sub: s.sub }));
 
 function readAsDataUrl(file) {
   return new Promise((resolve, reject) => {
@@ -48,94 +53,73 @@ function readAsDataUrl(file) {
 
 export default function ControlPanel() {
   const {
-    siteName, primary, sections, sectionTitles, font, favicon, logo, heroSlides,
-    setSiteName, setPrimary, setFont, setFavicon, setLogo, setHeroSlides,
-    setSectionTitle, toggle, setAll, reset,
+    siteName, colors, nav, contacts, footer, subFooter2, layout,
+    sections, sectionTitles, font, favicon, logo, heroSlides,
+    setSiteName, setColor, setNav, setContacts, setFooter, setSubFooter2, setLayout,
+    setFont, setFavicon, setLogo, setHeroSlides, setSectionTitle, toggle, setAll, reset,
   } = useControl();
 
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState("general");
-  const [hex, setHex] = useState(primary);
   const [status, setStatus] = useState(null);
-  const [dragging, setDragging] = useState(null); // which dropzone is dragging
+  const [dragging, setDragging] = useState(null);
   const favRef = useRef(null);
   const logoRef = useRef(null);
   const heroRef = useRef(null);
 
-  useEffect(() => setHex(primary), [primary]);
+  // ---------- generic helpers ----------
+  const notify = (kind, text) => setStatus({ kind, text });
 
-  const commitHex = useCallback(() => {
-    if (isHexColor(hex)) setPrimary(hex.toLowerCase());
-  }, [hex, setPrimary]);
-
-  const onFile = async (file, setter) => {
+  const onImageFile = async (file, setter, label) => {
     if (!file) return;
     const ext = (file.name.split(".").pop() || "").toLowerCase();
-    if (!IMG_ACCEPT.replace(/\./g, "").split(",").includes(ext)) {
-      setStatus({ kind: "error", text: "فرمت تصویر پشتیبانی نمی‌شود." });
-      return;
-    }
+    if (!IMG_ACCEPT.replace(/\./g, "").split(",").includes(ext)) { notify("error", "فرمت تصویر پشتیبانی نمی‌شود."); return; }
     try {
       const preview = await readAsDataUrl(file);
       setter({ name: file.name, ext, preview, base64: preview.split(",")[1] });
       setStatus(null);
-    } catch {
-      setStatus({ kind: "error", text: "خواندن فایل ناموفق بود." });
-    }
+    } catch { notify("error", "خواندن فایل ناموفق بود."); }
   };
 
+  const onFontFile = async (file) => {
+    if (!file) return;
+    const ext = (file.name.split(".").pop() || "").toLowerCase();
+    if (!["ttf", "otf", "woff", "woff2"].includes(ext)) { notify("error", "فرمت فونت پشتیبانی نمی‌شود."); return; }
+    const preview = await readAsDataUrl(file);
+    setFont({ name: file.name, ext, preview, base64: preview.split(",")[1] });
+    setStatus(null);
+  };
+
+  // ---------- hero ----------
+  const slides = heroSlides || HERO_DEFAULTS;
   const addHeroFiles = async (files) => {
     const list = Array.from(files || []);
     for (const file of list) {
       const ext = (file.name.split(".").pop() || "").toLowerCase();
       if (!["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) continue;
       const preview = await readAsDataUrl(file);
-      setHeroSlides((sl) => [
-        ...(sl || []),
-        { img: preview, base64: preview.split(",")[1], ext, href: "#", title: "", sub: "" },
-      ]);
+      setHeroSlides((sl) => [...(sl || HERO_DEFAULTS), { img: preview, base64: preview.split(",")[1], ext, href: "#", title: "", sub: "" }]);
     }
   };
+  const updateHero = (i, patch) => setHeroSlides((sl) => (sl || HERO_DEFAULTS).map((x, k) => (k === i ? { ...x, ...patch } : x)));
+  const removeHero = (i) => setHeroSlides((sl) => (sl || HERO_DEFAULTS).filter((_, k) => k !== i));
 
-  const updateHero = (i, patch) => setHeroSlides((sl) => (sl || []).map((x, k) => (k === i ? { ...x, ...patch } : x)));
-  const removeHero = (i) => setHeroSlides((sl) => (sl || []).filter((_, k) => k !== i));
-
-  const onFontFile = async (file) => {
-    if (!file) return;
-    const ext = (file.name.split(".").pop() || "").toLowerCase();
-    if (!["ttf", "otf", "woff", "woff2"].includes(ext)) {
-      setStatus({ kind: "error", text: "فرمت فونت پشتیبانی نمی‌شود." });
-      return;
-    }
-    const preview = await readAsDataUrl(file);
-    setFont({ name: file.name, ext, preview, base64: preview.split(",")[1] });
-    setStatus(null);
-  };
-
+  // ---------- apply ----------
   const apply = async () => {
     setStatus({ kind: "busy", text: "در حال اعمال..." });
     try {
       const payload = {
-        siteName,
-        primary,
-        sections,
-        sectionTitles,
+        siteName, colors, nav, contacts, footer, subFooter2, layout, sections, sectionTitles,
         font: font ? (font.base64 ? { name: font.name, ext: font.ext, base64: font.base64 } : { keep: true }) : null,
         favicon: favicon ? (favicon.base64 ? { ext: favicon.ext, base64: favicon.base64 } : { keep: true }) : null,
         logo: logo ? (logo.base64 ? { ext: logo.ext, base64: logo.base64 } : { keep: true }) : null,
         heroSlides: heroSlides
-          ? heroSlides.map((s) =>
-              s.base64
-                ? { base64: s.base64, ext: s.ext, href: s.href, title: s.title, sub: s.sub }
-                : { img: s.img, href: s.href, title: s.title, sub: s.sub }
-            )
+          ? heroSlides.map((s) => s.base64
+              ? { base64: s.base64, ext: s.ext, href: s.href, title: s.title, sub: s.sub }
+              : { img: s.img, href: s.href, title: s.title, sub: s.sub })
           : null,
       };
-      const res = await fetch("/api/apply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch("/api/apply", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) setStatus({ kind: "ok", text: "اعمال شد — کدهای محلی به‌روزرسانی شدند." });
       else setStatus({ kind: "error", text: data.error || "خطا در اعمال تغییرات." });
@@ -146,15 +130,27 @@ export default function ControlPanel() {
   };
 
   const hiddenCount = Object.values(sections).filter((v) => v === false).length;
-
   const tabs = [
     { id: "general", label: "عمومی" },
+    { id: "color", label: "رنگ" },
+    { id: "font", label: "فونت" },
     { id: "sections", label: "بخش‌ها", badge: hiddenCount > 0 ? hiddenCount : null },
     { id: "titles", label: "عناوین" },
     { id: "hero", label: "اسلایدر" },
-    { id: "color", label: "رنگ" },
-    { id: "font", label: "فونت" },
+    { id: "nav", label: "ناوبار" },
+    { id: "contacts", label: "تماس" },
+    { id: "footer", label: "پاورقی" },
+    { id: "layout", label: "چیدمان" },
   ];
+
+  // small editors
+  const LinkRow = ({ link, onChange, onRemove }) => (
+    <div className="cp-linkrow">
+      <input className="cp-text-input" value={link.label} placeholder="عنوان" onChange={(e) => onChange({ ...link, label: e.target.value })} />
+      <input className="cp-text-input" value={link.href} placeholder="لینک" dir="ltr" onChange={(e) => onChange({ ...link, href: e.target.value })} />
+      <button className="cp-btn cp-btn-line cp-btn-s" onClick={onRemove}>✕</button>
+    </div>
+  );
 
   return (
     <>
@@ -172,10 +168,7 @@ export default function ControlPanel() {
             <header className="cp-head">
               <div className="cp-title">
                 <span className="cp-dot" />
-                <div>
-                  <b>کنترل پنل دیتاکالا</b>
-                  <small>پیش‌نمایش زنده — تغییرات به‌صورت آنی اعمال می‌شود</small>
-                </div>
+                <div><b>کنترل پنل دیتاکالا</b><small>پیش‌نمایش زنده</small></div>
               </div>
               <button className="cp-x" onClick={() => setOpen(false)} aria-label="بستن">×</button>
             </header>
@@ -190,44 +183,91 @@ export default function ControlPanel() {
             </nav>
 
             <div className="cp-body">
+              {/* ===== GENERAL ===== */}
               {tab === "general" && (
                 <div className="cp-scroll">
                   <div className="cp-group-title">نام سایت (عنوان تب مرورگر)</div>
-                  <input
-                    className="cp-text-input"
-                    value={siteName}
-                    onChange={(e) => setSiteName(e.target.value)}
-                    placeholder="دیتاکالا"
-                  />
-                  <p className="cp-hint">این نام در تب مرورگر نمایش داده می‌شود.</p>
-
+                  <input className="cp-text-input" value={siteName} onChange={(e) => setSiteName(e.target.value)} />
                   <div className="cp-group-title" style={{ marginTop: 18 }}>آیکون سایت (Favicon)</div>
                   <div className="cp-media-row">
-                    <div className="cp-media-preview">
-                      {(favicon && favicon.preview) ? <img src={favicon.preview} alt="" /> : <span>—</span>}
-                    </div>
+                    <div className="cp-media-preview">{(favicon && favicon.preview) ? <img src={favicon.preview} alt="" /> : <span>—</span>}</div>
                     <div className="cp-media-actions">
                       <button className="cp-btn cp-btn-line" onClick={() => favRef.current && favRef.current.click()}>آپلود آیکون</button>
                       {favicon && <button className="cp-btn cp-btn-line" onClick={() => setFavicon(null)}>حذف</button>}
-                      <input ref={favRef} type="file" accept={IMG_ACCEPT} hidden onChange={(e) => onFile(e.target.files && e.target.files[0], setFavicon)} />
+                      <input ref={favRef} type="file" accept={IMG_ACCEPT} hidden onChange={(e) => onImageFile(e.target.files && e.target.files[0], setFavicon)} />
                     </div>
                   </div>
-
                   <div className="cp-group-title" style={{ marginTop: 18 }}>لوگوی سایت (داخل سایت)</div>
                   <div className="cp-media-row">
-                    <div className="cp-media-preview" style={{ background: "#f3f4f6" }}>
-                      {(logo && logo.preview) ? <img src={logo.preview} alt="" /> : <span>—</span>}
-                    </div>
+                    <div className="cp-media-preview" style={{ background: "#f3f4f6" }}>{(logo && logo.preview) ? <img src={logo.preview} alt="" /> : <span>—</span>}</div>
                     <div className="cp-media-actions">
                       <button className="cp-btn cp-btn-line" onClick={() => logoRef.current && logoRef.current.click()}>آپلود لوگو</button>
                       {logo && <button className="cp-btn cp-btn-line" onClick={() => setLogo(null)}>حذف</button>}
-                      <input ref={logoRef} type="file" accept={IMG_ACCEPT} hidden onChange={(e) => onFile(e.target.files && e.target.files[0], setLogo)} />
+                      <input ref={logoRef} type="file" accept={IMG_ACCEPT} hidden onChange={(e) => onImageFile(e.target.files && e.target.files[0], setLogo)} />
                     </div>
                   </div>
-                  <p className="cp-hint">لوگو جایگزین وردمارک فعلی در سربرگ می‌شود (تصویر PNG با پس‌زمینه شفاف پیشنهاد می‌شود).</p>
                 </div>
               )}
 
+              {/* ===== COLOR ===== */}
+              {tab === "color" && (
+                <div className="cp-scroll">
+                  <div className="cp-group-title">رنگ اصلی</div>
+                  <div className="cp-swatch">
+                    <div className="cp-swatch-main" style={{ background: colors.primary }}><span>{colors.primary}</span></div>
+                    <div className="cp-swatch-minis">
+                      <div><i style={{ background: colors.primary }} /><code>--red</code><span>{colors.primary}</span></div>
+                      <div><i style={{ background: darken(colors.primary, 0.12) }} /><code>--red-h</code><span>{darken(colors.primary, 0.12)}</span></div>
+                      <div><i style={{ background: tint(colors.primary, 0.9) }} /><code>--red-soft</code><span>{tint(colors.primary, 0.9)}</span></div>
+                    </div>
+                  </div>
+                  <div className="cp-palette">
+                    {PRIMARY_PALETTE.map((c) => (
+                      <button key={c} className={"cp-color" + (colors.primary.toLowerCase() === c.toLowerCase() ? " on" : "")}
+                        style={{ background: c }} onClick={() => setColor("primary", c)} title={c} aria-label={c} />
+                    ))}
+                  </div>
+
+                  <div className="cp-group-title" style={{ marginTop: 18 }}>همه رنگ‌های سایت</div>
+                  {COLOR_FIELDS.map((f) => (
+                    <div className="cp-color-row" key={f.key}>
+                      <i style={{ background: colors[f.key] }} />
+                      <div className="cp-color-meta">
+                        <b>{f.label}</b>
+                        <code>{f.css}</code>
+                      </div>
+                      <input className="cp-hex-input" value={colors[f.key]} onChange={(e) => setColor(f.key, e.target.value)}
+                        onBlur={() => isHexColor(colors[f.key]) && setColor(f.key, colors[f.key].toLowerCase())} spellCheck={false} maxLength={7} />
+                      <input type="color" className="cp-color-input" value={isHexColor(colors[f.key]) ? colors[f.key] : "#000000"}
+                        onChange={(e) => setColor(f.key, e.target.value)} />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* ===== FONT ===== */}
+              {tab === "font" && (
+                <div className="cp-scroll">
+                  <div className="cp-group-title">آپلود فونت</div>
+                  <div className={"cp-drop" + (dragging === "font" ? " drag" : "")}
+                    onDragOver={(e) => { e.preventDefault(); setDragging("font"); }} onDragLeave={() => setDragging(null)}
+                    onDrop={(e) => { e.preventDefault(); setDragging(null); onFontFile(e.dataTransfer.files && e.dataTransfer.files[0]); }}
+                    onClick={() => document.getElementById("cp-font-input") && document.getElementById("cp-font-input").click()}>
+                    <b>فایل فونت را اینجا بکشید یا کلیک کنید</b>
+                    <span>.ttf .otf .woff .woff2</span>
+                    <input id="cp-font-input" type="file" accept=".ttf,.otf,.woff,.woff2" hidden onChange={(e) => onFontFile(e.target.files && e.target.files[0])} />
+                  </div>
+                  {font && (
+                    <div className="cp-font-loaded">
+                      <div className="cp-font-name">{font.name}</div>
+                      <div className="cp-font-preview" style={{ fontFamily: '"DkCustom", Vazirmatn, sans-serif' }}>دیتاکالا ۱۲۳۴ — پیش‌نمایش</div>
+                      <button className="cp-btn cp-btn-line" onClick={() => setFont(null)}>حذف فونت</button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* ===== SECTIONS ===== */}
               {tab === "sections" && (
                 <div className="cp-scroll">
                   <div className="cp-toolbar">
@@ -239,10 +279,7 @@ export default function ControlPanel() {
                       <div className="cp-group-title">{g.title}</div>
                       {g.items.map((id) => (
                         <label className="cp-row" key={id}>
-                          <span className="cp-switch">
-                            <input type="checkbox" checked={sections[id] !== false} onChange={() => toggle(id)} />
-                            <i />
-                          </span>
+                          <span className="cp-switch"><input type="checkbox" checked={sections[id] !== false} onChange={() => toggle(id)} /><i /></span>
                           <span className="cp-row-label">{LABELS[id] || id}</span>
                           <code className="cp-key">{id}</code>
                         </label>
@@ -252,34 +289,20 @@ export default function ControlPanel() {
                 </div>
               )}
 
+              {/* ===== TITLES ===== */}
               {tab === "titles" && (
                 <div className="cp-scroll">
-                  <p className="cp-hint" style={{ marginTop: 0 }}>متن، اندازه و ضخامت عنوان هر بخش صفحه اصلی را تنظیم کنید.</p>
                   {TITLE_KEYS.map((id) => {
                     const t = sectionTitles[id] || {};
                     return (
                       <div className="cp-title-card" key={id}>
                         <div className="cp-title-label">{LABELS[id] || id}</div>
-                        <input
-                          className="cp-text-input"
-                          value={t.text || ""}
-                          placeholder="متن عنوان"
-                          onChange={(e) => setSectionTitle(id, { text: e.target.value })}
-                        />
+                        <input className="cp-text-input" value={t.text || ""} placeholder="متن عنوان" onChange={(e) => setSectionTitle(id, { text: e.target.value })} />
                         <div className="cp-title-row">
-                          <label className="cp-mini">
-                            <span>اندازه</span>
-                            <input
-                              type="number"
-                              min="10"
-                              max="120"
-                              value={t.size ?? 22}
-                              onChange={(e) => setSectionTitle(id, { size: parseInt(e.target.value, 10) || 22 })}
-                            />
-                            <em>px</em>
+                          <label className="cp-mini"><span>اندازه</span>
+                            <input type="number" min="10" max="120" value={t.size ?? 22} onChange={(e) => setSectionTitle(id, { size: parseInt(e.target.value, 10) || 22 })} /><em>px</em>
                           </label>
-                          <label className="cp-mini">
-                            <span>ضخامت</span>
+                          <label className="cp-mini"><span>ضخامت</span>
                             <select value={t.weight ?? 600} onChange={(e) => setSectionTitle(id, { weight: parseInt(e.target.value, 10) })}>
                               {WEIGHTS.map((w) => <option key={w} value={w}>{w}</option>)}
                             </select>
@@ -291,6 +314,7 @@ export default function ControlPanel() {
                 </div>
               )}
 
+              {/* ===== HERO ===== */}
               {tab === "hero" && (
                 <div className="cp-scroll">
                   <div className="cp-toolbar">
@@ -298,109 +322,141 @@ export default function ControlPanel() {
                     <button className="cp-btn cp-btn-line" onClick={() => setHeroSlides(null)}>بازگشت به پیش‌فرض</button>
                     <input ref={heroRef} type="file" accept={IMG_ACCEPT} multiple hidden onChange={(e) => addHeroFiles(e.target.files)} />
                   </div>
-                  <p className="cp-hint" style={{ marginTop: 0 }}>تصاویر آپلودی جایگزین اسلایدر پیش‌فرض می‌شوند. برای هر اسلاید می‌توانید عنوان و زیرنویس بگذارید.</p>
-
-                  <div
-                    className={"cp-drop" + (dragging === "hero" ? " drag" : "")}
-                    onDragOver={(e) => { e.preventDefault(); setDragging("hero"); }}
-                    onDragLeave={() => setDragging(null)}
+                  <p className="cp-hint" style={{ marginTop: 0 }}>شامل {slides.length} اسلاید (پیش‌فرض + سفارشی). می‌توانید هر کدام را حذف یا ویرایش کنید.</p>
+                  <div className={"cp-drop" + (dragging === "hero" ? " drag" : "")}
+                    onDragOver={(e) => { e.preventDefault(); setDragging("hero"); }} onDragLeave={() => setDragging(null)}
                     onDrop={(e) => { e.preventDefault(); setDragging(null); addHeroFiles(e.dataTransfer.files); }}
-                    onClick={() => heroRef.current && heroRef.current.click()}
-                  >
+                    onClick={() => heroRef.current && heroRef.current.click()}>
                     <b>تصاویر اسلایدر را اینجا رها کنید</b>
-                    <span>یا کلیک کنید — چند تصویر همزمان مجاز است</span>
+                    <span>چند تصویر همزمان مجاز است</span>
                   </div>
-
-                  {heroSlides && heroSlides.length > 0 && (
-                    <div className="cp-hero-list">
-                      {heroSlides.map((s, i) => (
-                        <div className="cp-hero-card" key={i}>
-                          <img src={s.img} alt="" />
-                          <div className="cp-hero-fields">
-                            <input className="cp-text-input" value={s.title || ""} placeholder="عنوان (اختیاری)" onChange={(e) => updateHero(i, { title: e.target.value })} />
-                            <input className="cp-text-input" value={s.sub || ""} placeholder="زیرنویس (اختیاری)" onChange={(e) => updateHero(i, { sub: e.target.value })} />
-                            <div className="cp-hero-meta">
-                              <input className="cp-text-input" value={s.href || "#"} placeholder="لینک" onChange={(e) => updateHero(i, { href: e.target.value })} />
-                              <button className="cp-btn cp-btn-line" onClick={() => removeHero(i)}>حذف</button>
-                            </div>
+                  <div className="cp-hero-list">
+                    {slides.map((s, i) => (
+                      <div className="cp-hero-card" key={i}>
+                        <img src={s.img} alt="" />
+                        <div className="cp-hero-fields">
+                          <input className="cp-text-input" value={s.title || ""} placeholder="عنوان (اختیاری)" onChange={(e) => updateHero(i, { title: e.target.value })} />
+                          <input className="cp-text-input" value={s.sub || ""} placeholder="زیرنویس (اختیاری)" onChange={(e) => updateHero(i, { sub: e.target.value })} />
+                          <div className="cp-hero-meta">
+                            <input className="cp-text-input" value={s.href || "#"} placeholder="لینک" onChange={(e) => updateHero(i, { href: e.target.value })} />
+                            <button className="cp-btn cp-btn-line" onClick={() => removeHero(i)}>حذف</button>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  )}
-                  {(!heroSlides || heroSlides.length === 0) && (
-                    <p className="cp-hint">در حال حاضر اسلایدر پیش‌فرض (۷ اسلاید) نمایش داده می‌شود.</p>
-                  )}
-                </div>
-              )}
-
-              {tab === "color" && (
-                <div className="cp-scroll">
-                  <div className="cp-group-title">رنگ اصلی (توکن قرمز)</div>
-                  <div className="cp-swatch">
-                    <div className="cp-swatch-main" style={{ background: primary }}>
-                      <span>{primary}</span>
-                    </div>
-                    <div className="cp-swatch-minis">
-                      <div><i style={{ background: primary }} /><code>--red</code><span>{primary}</span></div>
-                      <div><i style={{ background: darken(primary, 0.12) }} /><code>--red-h</code><span>{darken(primary, 0.12)}</span></div>
-                      <div><i style={{ background: tint(primary, 0.9) }} /><code>--red-soft</code><span>{tint(primary, 0.9)}</span></div>
-                    </div>
-                  </div>
-
-                  <div className="cp-group-title" style={{ marginTop: 16 }}>پالت</div>
-                  <div className="cp-palette">
-                    {PALETTE.map((c) => (
-                      <button
-                        key={c}
-                        className={"cp-color" + (primary.toLowerCase() === c.toLowerCase() ? " on" : "")}
-                        style={{ background: c }}
-                        onClick={() => setPrimary(c)}
-                        aria-label={c}
-                        title={c}
-                      />
+                      </div>
                     ))}
                   </div>
-
-                  <div className="cp-group-title" style={{ marginTop: 16 }}>کد رنگ دلخواه</div>
-                  <div className="cp-hex-row">
-                    <input className="cp-hex-input" value={hex} onChange={(e) => setHex(e.target.value)} onBlur={commitHex}
-                      onKeyDown={(e) => e.key === "Enter" && commitHex()} spellCheck={false} maxLength={7} />
-                    <input type="color" className="cp-color-input" value={isHexColor(hex) ? hex : primary}
-                      onChange={(e) => { setHex(e.target.value); setPrimary(e.target.value); }} />
-                    <button className="cp-btn cp-btn-line" onClick={commitHex}>اعمال</button>
-                  </div>
-                  <p className="cp-hint">همه عناصر قرمز سایت از توکن <code>--red</code> پیروی می‌کنند.</p>
                 </div>
               )}
 
-              {tab === "font" && (
+              {/* ===== NAV ===== */}
+              {tab === "nav" && (
                 <div className="cp-scroll">
-                  <div className="cp-group-title">آپلود فونت</div>
-                  <div
-                    className={"cp-drop" + (dragging === "font" ? " drag" : "")}
-                    onDragOver={(e) => { e.preventDefault(); setDragging("font"); }}
-                    onDragLeave={() => setDragging(null)}
-                    onDrop={(e) => { e.preventDefault(); setDragging(null); onFontFile(e.dataTransfer.files && e.dataTransfer.files[0]); }}
-                  >
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                      <path d="M12 16V4m0 0L7 9m5-5l5 5" />
-                      <path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" />
-                    </svg>
-                    <b>فایل فونت را اینجا بکشید یا کلیک کنید</b>
-                    <span>فرمت‌های پشتیبانی‌شده: .ttf .otf .woff .woff2</span>
-                  </div>
-
-                  {font && (
-                    <div className="cp-font-loaded">
-                      <div className="cp-font-name">{font.name}</div>
-                      <div className="cp-font-preview" style={{ fontFamily: '"DkCustom", Vazirmatn, sans-serif' }}>
-                        دیتاکالا ۱۲۳۴ — پیش‌نمایش فونت سفارشی شما
-                      </div>
-                      <button className="cp-btn cp-btn-line" onClick={() => setFont(null)}>حذف فونت</button>
+                  <div className="cp-group-title">آیتم‌های ناوبار</div>
+                  {nav.map((item, i) => (
+                    <div className="cp-title-card" key={i}>
+                      <div className="cp-nav-kind">{item.kind === "mega" ? "مگامنو" : item.kind === "dropdown" ? "منوی کشویی" : "لینک"}</div>
+                      <input className="cp-text-input" value={item.label || ""} placeholder="عنوان" onChange={(e) => setNav((n) => n.map((x, k) => k === i ? { ...x, label: e.target.value } : x))} />
+                      {item.kind === "link" && (
+                        <input className="cp-text-input" style={{ marginTop: 6 }} value={item.href || ""} placeholder="لینک" dir="ltr" onChange={(e) => setNav((n) => n.map((x, k) => k === i ? { ...x, href: e.target.value } : x))} />
+                      )}
+                      {item.kind === "dropdown" && (
+                        <select className="cp-select" style={{ marginTop: 6 }} value={item.key || "solutions"} onChange={(e) => setNav((n) => n.map((x, k) => k === i ? { ...x, key: e.target.value } : x))}>
+                          <option value="solutions">راه‌حل‌ها</option>
+                          <option value="services">خدمات</option>
+                          <option value="resources">منابع</option>
+                        </select>
+                      )}
+                      <button className="cp-btn cp-btn-line cp-btn-s" style={{ marginTop: 6 }} onClick={() => setNav((n) => n.filter((_, k) => k !== i))}>حذف آیتم</button>
                     </div>
-                  )}
-                  <p className="cp-hint">پس از آپلود، کل سایت از این فونت پیروی می‌کند.</p>
+                  ))}
+                  <div className="cp-toolbar">
+                    <button className="cp-btn cp-btn-line" onClick={() => setNav((n) => [...n, { kind: "link", label: "لینک جدید", href: "/" }])}>+ لینک</button>
+                    <button className="cp-btn cp-btn-line" onClick={() => setNav((n) => [...n, { kind: "dropdown", key: "solutions", label: "منوی جدید" }])}>+ منوی کشویی</button>
+                    <button className="cp-btn cp-btn-line" onClick={() => setNav((n) => [...n, { kind: "mega", label: "همه محصولات" }])}>+ مگامنو</button>
+                  </div>
+                </div>
+              )}
+
+              {/* ===== CONTACTS ===== */}
+              {tab === "contacts" && (
+                <div className="cp-scroll">
+                  <div className="cp-group-title">آیتم‌های بخش تماس</div>
+                  {contacts.map((c, i) => (
+                    <div className="cp-title-card" key={i}>
+                      <input className="cp-text-input" value={c.title || ""} placeholder="عنوان" onChange={(e) => setContacts((cs) => cs.map((x, k) => k === i ? { ...x, title: e.target.value } : x))} />
+                      <input className="cp-text-input" style={{ marginTop: 6 }} value={c.text || ""} placeholder="توضیح" onChange={(e) => setContacts((cs) => cs.map((x, k) => k === i ? { ...x, text: e.target.value } : x))} />
+                      <div className="cp-hero-meta" style={{ marginTop: 6 }}>
+                        <input className="cp-text-input" value={c.href || ""} placeholder="لینک" dir="ltr" onChange={(e) => setContacts((cs) => cs.map((x, k) => k === i ? { ...x, href: e.target.value } : x))} />
+                        <input className="cp-text-input" value={c.img || ""} placeholder="آیکون (URL)" dir="ltr" onChange={(e) => setContacts((cs) => cs.map((x, k) => k === i ? { ...x, img: e.target.value } : x))} />
+                        <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => setContacts((cs) => cs.filter((_, k) => k !== i))}>✕</button>
+                      </div>
+                    </div>
+                  ))}
+                  <button className="cp-btn cp-btn-line" style={{ width: "100%" }} onClick={() => setContacts((cs) => [...cs, { img: "", title: "عنوان جدید", text: "", href: "/contact" }])}>+ افزودن آیتم</button>
+                </div>
+              )}
+
+              {/* ===== FOOTER ===== */}
+              {tab === "footer" && (
+                <div className="cp-scroll">
+                  <div className="cp-group-title">ستون‌های پاورقی</div>
+                  {footer.columns.map((col, ci) => (
+                    <div className="cp-colcard" key={ci}>
+                      <div className="cp-hero-meta">
+                        <input className="cp-text-input" value={col.title || ""} placeholder="عنوان ستون" onChange={(e) => setFooter((f) => ({ ...f, columns: f.columns.map((c, k) => k === ci ? { ...c, title: e.target.value } : c) }))} />
+                        <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => setFooter((f) => ({ ...f, columns: f.columns.filter((_, k) => k !== ci) }))}>حذف ستون</button>
+                      </div>
+                      {(col.links || []).map((l, li) => (
+                        <div className="cp-linkrow" key={li}>
+                          <input className="cp-text-input" value={l.label} placeholder="عنوان" onChange={(e) => setFooter((f) => ({ ...f, columns: f.columns.map((c, k) => k === ci ? { ...c, links: c.links.map((x, j) => j === li ? { ...x, label: e.target.value } : x) } : c) }))} />
+                          <input className="cp-text-input" value={l.href} placeholder="لینک" dir="ltr" onChange={(e) => setFooter((f) => ({ ...f, columns: f.columns.map((c, k) => k === ci ? { ...c, links: c.links.map((x, j) => j === li ? { ...x, href: e.target.value } : x) } : c) }))} />
+                          <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => setFooter((f) => ({ ...f, columns: f.columns.map((c, k) => k === ci ? { ...c, links: c.links.filter((_, j) => j !== li) } : c) }))}>✕</button>
+                        </div>
+                      ))}
+                      <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => setFooter((f) => ({ ...f, columns: f.columns.map((c, k) => k === ci ? { ...c, links: [...(c.links || []), { label: "لینک جدید", href: "#" }] } : c) }))}>+ افزودن لینک</button>
+                    </div>
+                  ))}
+                  <button className="cp-btn cp-btn-line" style={{ width: "100%", marginBottom: 16 }} onClick={() => setFooter((f) => ({ ...f, columns: [...f.columns, { title: "ستون جدید", links: [] }] }))}>+ افزودن ستون</button>
+
+                  <div className="cp-group-title">ستون پنجم (خبرنامه / شبکه‌های اجتماعی / اپلیکیشن)</div>
+                  <label className="cp-row"><span className="cp-switch"><input type="checkbox" checked={footer.newsletter} onChange={() => setFooter((f) => ({ ...f, newsletter: !f.newsletter }))} /><i /></span><span className="cp-row-label">خبرنامه (ایمیل)</span></label>
+                  <label className="cp-row"><span className="cp-switch"><input type="checkbox" checked={footer.social} onChange={() => setFooter((f) => ({ ...f, social: !f.social }))} /><i /></span><span className="cp-row-label">شبکه‌های اجتماعی</span></label>
+                  <label className="cp-row"><span className="cp-switch"><input type="checkbox" checked={footer.apps} onChange={() => setFooter((f) => ({ ...f, apps: !f.apps }))} /><i /></span><span className="cp-row-label">CTA دانلود اپلیکیشن</span></label>
+
+                  <div className="cp-group-title" style={{ marginTop: 16 }}>زیر پاورقی ۲ (نوار کپی‌رایت)</div>
+                  <input className="cp-text-input" value={subFooter2.copyright || ""} placeholder="متن کپی‌رایت" onChange={(e) => setSubFooter2((s) => ({ ...s, copyright: e.target.value }))} />
+                  <div style={{ marginTop: 10 }}>
+                    {(subFooter2.links || []).map((l, i) => (
+                      <div className="cp-linkrow" key={i}>
+                        <input className="cp-text-input" value={l.label} placeholder="عنوان" onChange={(e) => setSubFooter2((s) => ({ ...s, links: s.links.map((x, k) => k === i ? { ...x, label: e.target.value } : x) }))} />
+                        <input className="cp-text-input" value={l.href} placeholder="لینک" dir="ltr" onChange={(e) => setSubFooter2((s) => ({ ...s, links: s.links.map((x, k) => k === i ? { ...x, href: e.target.value } : x) }))} />
+                        <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => setSubFooter2((s) => ({ ...s, links: s.links.filter((_, k) => k !== i) }))}>✕</button>
+                      </div>
+                    ))}
+                    <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => setSubFooter2((s) => ({ ...s, links: [...(s.links || []), { label: "لینک جدید", href: "#" }] }))}>+ افزودن لینک</button>
+                  </div>
+                </div>
+              )}
+
+              {/* ===== LAYOUT ===== */}
+              {tab === "layout" && (
+                <div className="cp-scroll">
+                  <div className="cp-group-title">تعداد ردیف‌ها</div>
+                  {[
+                    { key: "heroCategoriesRows", label: "دسته‌بندی‌های قهرمان", hint: "تعداد ردیف کارت‌های دسته‌بندی هنگام hover" },
+                    { key: "newProductsRows", label: "محصولات جدید", hint: "تعداد ردیف کارت‌های محصول (هر ردیف = ۴ کارت)" },
+                    { key: "recommendationsRows", label: "پیشنهادی‌ها", hint: "تعداد ردیف کارت‌های محصول" },
+                  ].map((r) => (
+                    <div className="cp-title-card" key={r.key}>
+                      <div className="cp-title-label">{r.label}</div>
+                      <div className="cp-title-row">
+                        <label className="cp-mini"><span>ردیف</span>
+                          <input type="number" min="1" max="4" value={layout[r.key] ?? 1} onChange={(e) => setLayout((l) => ({ ...l, [r.key]: Math.max(1, Math.min(4, parseInt(e.target.value, 10) || 1)) }))} />
+                        </label>
+                      </div>
+                      <p className="cp-hint" style={{ marginTop: 6 }}>{r.hint}</p>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
@@ -412,9 +468,7 @@ export default function ControlPanel() {
               </button>
             </footer>
 
-            {status && status.kind !== "busy" && (
-              <div className={"cp-status " + status.kind}>{status.text}</div>
-            )}
+            {status && status.kind !== "busy" && <div className={"cp-status " + status.kind}>{status.text}</div>}
           </aside>
         </div>
       )}

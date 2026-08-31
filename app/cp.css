@@ -1,12 +1,12 @@
 /* ===== Datakala Control Panel ===== */
-/* Vertical tab pinned to the right edge of the screen (avoiding the chat widget at bottom-left) */
-.cp-fab{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:190;
+/* Vertical tab pinned to the LEFT edge of the screen */
+.cp-fab{position:fixed;top:50%;left:0;transform:translateY(-50%);z-index:190;
   display:flex;flex-direction:column;align-items:center;gap:8px;
   background:#111827;color:#fff;border:0;cursor:pointer;
-  padding:14px 9px;border-radius:12px 0 0 12px;
+  padding:14px 9px;border-radius:0 12px 12px 0;
   box-shadow:0 8px 24px rgba(0,0,0,.3);transition:background .15s,padding .15s;
   font-family:Vazirmatn,Tahoma,sans-serif}
-.cp-fab:hover{background:#1f2937;padding-left:14px}
+.cp-fab:hover{background:#1f2937;padding-right:14px}
 .cp-fab svg{color:var(--red,#C00000)}
 .cp-fab-label{writing-mode:vertical-rl;font-size:12px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
 
@@ -154,3 +154,24 @@
 .admin-msg.ok{color:#12805c}
 .admin-msg.error{color:#b3261e}
 .admin-hint{font-size:11px;color:#aaa;text-align:center;margin:0;line-height:1.7}
+
+/* ===== additional CP controls (colors, nav, footer editors) ===== */
+.cp-tabs{overflow-x:auto;flex-wrap:nowrap}
+.cp-tabs button{flex:0 0 auto;min-width:56px}
+
+.cp-color-row{display:flex;align-items:center;gap:10px;border:1px solid #eee;border-radius:10px;padding:8px 10px;margin-bottom:8px}
+.cp-color-row>i{width:30px;height:30px;border-radius:8px;border:1px solid rgba(0,0,0,.08);flex-shrink:0}
+.cp-color-meta{flex:1;display:flex;flex-direction:column;min-width:0}
+.cp-color-meta b{font-size:13px}
+.cp-color-meta code{font-size:10px;color:#999;direction:ltr;text-align:left}
+.cp-color-row .cp-hex-input{width:86px;height:34px;flex-shrink:0}
+.cp-color-row .cp-color-input{width:38px;height:34px;flex-shrink:0}
+
+.cp-colcard{border:1px solid #eee;border-radius:12px;padding:12px;margin-bottom:12px;background:#fafafa}
+.cp-linkrow{display:flex;gap:6px;margin-top:6px}
+.cp-linkrow .cp-text-input{height:34px;font-size:12px}
+.cp-btn-s{height:34px;padding:0 12px;font-size:12px;flex-shrink:0}
+.cp-select{width:100%;height:38px;border:1px solid #ddd;border-radius:8px;padding:0 10px;font-size:13px;background:#fff;font-family:inherit}
+.cp-nav-kind{display:inline-block;font-size:10px;font-weight:700;color:#666;background:#f0f0f0;border-radius:4px;padding:2px 8px;margin-bottom:6px}
+
+.info-ico{width:36px;height:36px;display:grid;place-items:center;color:var(--red,#C00000);font-size:18px}

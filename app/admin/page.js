@@ -47,7 +47,7 @@ export default function AdminPage() {
     setAuthed(false);
   };
 
-  if (checking) return <div className="container" style={{ padding: 60, textAlign: "center", color: "#888" }}>در حال بررسی...</div>;
+  if (checking) return <div className="container" style={{ padding: 60, textAlign: "center", color: "var(--muted-2)" }}>در حال بررسی...</div>;
 
   return (
     <div className="container" style={{ maxWidth: 420, padding: "60px 20px" }}>

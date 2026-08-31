@@ -3,8 +3,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { PRODUCTS } from "@/lib/data";
 import SectionTitle from "./SectionTitle";
+import { useControl } from "./ControlProvider";
 
-export default function HomeCarousel({ id, fallbackTitle, ids, pageSize = 4 }) {
+export default function HomeCarousel({ id, fallbackTitle, ids }) {
+  const { layout } = useControl();
+  const rowsKey = id === "new-products" ? "newProductsRows" : "recommendationsRows";
+  const rows = Math.max(1, Math.min(4, layout[rowsKey] || 1));
+  const pageSize = 4 * rows;
   const [page, setPage] = useState(0);
   const items = ids.map((id) => PRODUCTS.find((p) => p.id === id)).filter(Boolean);
   const pages = Math.max(1, Math.ceil(items.length / pageSize));

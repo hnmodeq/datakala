@@ -4,6 +4,7 @@ import CategoryExplorer from "@/components/CategoryExplorer";
 import HomeCarousel from "@/components/HomeCarousel";
 import Section from "@/components/Section";
 import SectionTitle from "@/components/SectionTitle";
+import ContactItems from "@/components/ContactItems";
 import { NEW_IDS, REC_IDS, SOLUTIONS } from "@/lib/data";
 
 export default function Home() {
@@ -103,11 +104,7 @@ export default function Home() {
         <section className="home-sec last">
           <div className="container">
             <SectionTitle id="contacts" fallback="اطلاعات بیشتر بگیرید" />
-            <div className="info-grid">
-              <Link className="info" href="/contact"><img src="/images/20251204162824r6935v.svg" alt="" /><div><h3>استعلام پروژه <span className="chev">‹</span></h3><p>پشتیبانی فنی سفارشی برای درخواست‌های مختلف.</p></div></Link>
-              <Link className="info" href="/contact"><img src="/images/20251204162824fbn9xq.svg" alt="" /><div><h3>تماس با فروش <span className="chev">‹</span></h3><p>برای استعلام محصولات و راه‌حل‌ها با تیم فروش ما تماس بگیرید.</p></div></Link>
-              <Link className="info" href="/support"><img src="/images/20251204162824bn64ca.svg" alt="" /><div><h3>گفتگوی آنلاین <span className="chev">‹</span></h3><p>همین حالا با کارشناس زنده برای پرسش‌های عمومی گفتگو کنید.</p></div></Link>
-            </div>
+            <ContactItems />
           </div>
         </section>
       </Section>

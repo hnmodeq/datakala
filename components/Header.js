@@ -7,6 +7,9 @@ import Section from "./Section";
 import { CATEGORIES, PRODUCTS, money } from "@/lib/data";
 import { MEGA, NAV_MENUS, NAV_LABELS } from "@/lib/mega";
 import { useCart } from "./CartProvider";
+import { useControl } from "./ControlProvider";
+
+const DROPDOWN_HREF = { solutions: "/solutions", services: "/services", resources: "/docs" };
 
 function Flag() {
   return (
@@ -24,6 +27,7 @@ export default function Header() {
   const path = usePathname();
   const router = useRouter();
   const { count, items } = useCart();
+  const { nav } = useControl();
   const [q, setQ] = useState("");
   const [sug, setSug] = useState([]);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -80,20 +84,33 @@ export default function Header() {
           <Link href="/" className="logo-link"><Logo /></Link>
 
           <nav className={"main-nav" + (navOpen ? " open" : "")}>
-            <div className="nav-item" onMouseEnter={showMega} onMouseLeave={hideMega}>
-              <button className={"nav-link all-products" + (mega ? " open" : "")}>همه محصولات</button>
-            </div>
-            {["solutions", "services", "resources"].map((key) => (
-              <div className="nav-dd" key={key}>
-                <Link className={"nav-link" + (path.startsWith("/" + key) ? " active" : "")} href={"/" + (key === "services" ? "services" : key === "resources" ? "docs" : "solutions")}>
-                  {NAV_LABELS[key]}
+            {(nav || []).map((item, idx) => {
+              if (item.kind === "mega") {
+                return (
+                  <div className="nav-item" key={"mega-" + idx} onMouseEnter={showMega} onMouseLeave={hideMega}>
+                    <button className={"nav-link all-products" + (mega ? " open" : "")}>{item.label || "همه محصولات"}</button>
+                  </div>
+                );
+              }
+              if (item.kind === "dropdown") {
+                const menu = NAV_MENUS[item.key] || [];
+                return (
+                  <div className="nav-dd" key={"dd-" + idx}>
+                    <Link className={"nav-link" + (path.startsWith(DROPDOWN_HREF[item.key] || "") ? " active" : "")} href={DROPDOWN_HREF[item.key] || "/"}>
+                      {item.label || NAV_LABELS[item.key] || ""}
+                    </Link>
+                    <div className="nav-fly">
+                      {menu.map((m) => <Link key={m.label} href={m.href}>{m.label}</Link>)}
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <Link className={"nav-link" + (path.startsWith(item.href || "") ? " active" : "")} key={"lnk-" + idx} href={item.href || "#"}>
+                  {item.label || ""}
                 </Link>
-                <div className="nav-fly">
-                  {NAV_MENUS[key].map((m) => <Link key={m.label} href={m.href}>{m.label}</Link>)}
-                </div>
-              </div>
-            ))}
-            <Link className={"nav-link" + (path.startsWith("/contact") ? " active" : "")} href="/contact">تماس با ما</Link>
+              );
+            })}
           </nav>
 
           <div className="header-acts">
@@ -135,7 +152,7 @@ export default function Header() {
                   {sug.map((p) => (
                     <Link key={p.id} href={`/products/${p.id}`} onClick={() => { setSug([]); setSearchOpen(false); }}>
                       <img src={p.img} alt="" />
-                      <div><b>{p.sku}</b><div style={{ color: "#888", fontSize: 12 }}>{money(p.price)} · {p.name.slice(0, 48)}…</div></div>
+                      <div><b>{p.sku}</b><div style={{ color: "var(--muted-2)", fontSize: 12 }}>{money(p.price)} · {p.name.slice(0, 48)}…</div></div>
                     </Link>
                   ))}
                 </div>

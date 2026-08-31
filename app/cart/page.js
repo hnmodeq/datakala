@@ -19,7 +19,7 @@ export default function CartPage() {
               <div className="cart-item" key={p.id}>
                 <Link href={`/products/${p.id}`}><img src={p.img} alt="" /></Link>
                 <div>
-                  <div className="sku" style={{ fontSize: 12, color: "#888" }}>{p.sku}</div>
+                  <div className="sku" style={{ fontSize: 12, color: "var(--muted-2)" }}>{p.sku}</div>
                   <h3><Link href={`/products/${p.id}`}>{p.name}</Link></h3>
                   <button onClick={() => remove(p.id)} style={{ fontSize: 12, color: "var(--red)", marginTop: 6 }}>حذف</button>
                 </div>
@@ -38,7 +38,7 @@ export default function CartPage() {
             <div className="sum-row"><span>ارسال</span><span>در تسویه حساب محاسبه می‌شود</span></div>
             <div className="sum-row total"><span>جمع کل</span><span>{money(sub)}</span></div>
             <button className="btn btn-red" style={{ width: "100%", justifyContent: "center", marginTop: 14 }} onClick={() => alert("تسویه نمایشی — سفارشی ثبت نشد.")}>تسویه حساب</button>
-            <p style={{ fontSize: 12, color: "#888", margin: "12px 0 0" }}>Visa، Mastercard، PayPal، انتقال بانکی و سفارش خرید پذیرفته می‌شود.</p>
+            <p style={{ fontSize: 12, color: "var(--muted-2)", margin: "12px 0 0" }}>Visa، Mastercard، PayPal، انتقال بانکی و سفارش خرید پذیرفته می‌شود.</p>
           </aside>
         </div>
       )}
