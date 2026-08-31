@@ -91,6 +91,7 @@ button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padd
 .hero{position:relative;background:#0b1220;overflow:hidden}
 .hero-track{display:flex;transition:transform .6s ease;direction:ltr}
 .hero-slide{min-width:100%;height:380px;position:relative}
+.hero-slide-empty{position:absolute;inset:0;background:linear-gradient(-90deg,#141820,#1e2a44)}
 .hero-slide img{width:100%;height:100%;object-fit:cover}
 .hero-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 max(40px, calc((100% - var(--max))/2 + 20px));color:#fff;background:linear-gradient(90deg,rgba(8,12,24,.55),rgba(8,12,24,.12) 48%,transparent 70%)}
 .hero-copy h2{margin:0 0 10px;font-size:34px;font-weight:700;max-width:520px;line-height:1.25;text-shadow:0 2px 16px rgba(0,0,0,.35)}

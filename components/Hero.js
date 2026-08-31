@@ -23,7 +23,7 @@ export default function Hero() {
       <div className="hero-track" style={{ transform: `translateX(-${i * 100}%)` }}>
         {slides.map((s, k) => (
           <Link className="hero-slide" href={s.href || "#"} key={k}>
-            <img src={s.img} alt={s.title || ""} />
+            {s.img ? <img src={s.img} alt={s.title || ""} /> : <div className="hero-slide-empty" />}
             {(s.title || s.sub) && (
               <div className="hero-copy">
                 {s.title && <h2>{s.title}</h2>}

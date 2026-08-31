@@ -66,6 +66,8 @@ export default function ControlPanel() {
   const favRef = useRef(null);
   const logoRef = useRef(null);
   const heroRef = useRef(null);
+  const heroImgRef = useRef(null);
+  const [heroImgIndex, setHeroImgIndex] = useState(-1);
 
   // ---------- generic helpers ----------
   const notify = (kind, text) => setStatus({ kind, text });
@@ -103,6 +105,23 @@ export default function ControlPanel() {
   };
   const updateHero = (i, patch) => setHeroSlides((sl) => (sl || HERO_DEFAULTS).map((x, k) => (k === i ? { ...x, ...patch } : x)));
   const removeHero = (i) => setHeroSlides((sl) => (sl || HERO_DEFAULTS).filter((_, k) => k !== i));
+  const changeHeroImage = async (i, file) => {
+    if (!file) return;
+    const ext = (file.name.split(".").pop() || "").toLowerCase();
+    if (!["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) { notify("error", "فرمت تصویر پشتیبانی نمی‌شود."); return; }
+    const preview = await readAsDataUrl(file);
+    setHeroSlides((sl) => (sl || HERO_DEFAULTS).map((x, k) => k === i ? { ...x, img: preview, base64: preview.split(",")[1], ext } : x));
+  };
+  const moveHero = (i, dir) => {
+    setHeroSlides((sl) => {
+      const arr = [...(sl || HERO_DEFAULTS)];
+      const j = i + dir;
+      if (j < 0 || j >= arr.length) return sl;
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      return arr;
+    });
+  };
+  const addEmptySlide = () => setHeroSlides((sl) => [...(sl || HERO_DEFAULTS), { img: "", href: "#", title: "", sub: "" }]);
 
   // ---------- apply ----------
   const apply = async () => {
@@ -318,28 +337,34 @@ export default function ControlPanel() {
               {tab === "hero" && (
                 <div className="cp-scroll">
                   <div className="cp-toolbar">
-                    <button className="cp-btn cp-btn-line" onClick={() => heroRef.current && heroRef.current.click()}>افزودن تصویر</button>
+                    <button className="cp-btn cp-btn-line" onClick={() => heroRef.current && heroRef.current.click()}>افزودن تصاویر</button>
+                    <button className="cp-btn cp-btn-line" onClick={addEmptySlide}>+ اسلاید خالی</button>
                     <button className="cp-btn cp-btn-line" onClick={() => setHeroSlides(null)}>بازگشت به پیش‌فرض</button>
                     <input ref={heroRef} type="file" accept={IMG_ACCEPT} multiple hidden onChange={(e) => addHeroFiles(e.target.files)} />
+                    <input ref={heroImgRef} type="file" accept={IMG_ACCEPT} hidden onChange={(e) => { if (heroImgIndex >= 0) changeHeroImage(heroImgIndex, e.target.files && e.target.files[0]); }} />
                   </div>
-                  <p className="cp-hint" style={{ marginTop: 0 }}>شامل {slides.length} اسلاید (پیش‌فرض + سفارشی). می‌توانید هر کدام را حذف یا ویرایش کنید.</p>
+                  <p className="cp-hint" style={{ marginTop: 0 }}>هر اسلاید یک آیتم است — تصویر، عنوان، کپشن و لینک هر کدام را جداگانه تنظیم کنید ({slides.length} اسلاید).</p>
                   <div className={"cp-drop" + (dragging === "hero" ? " drag" : "")}
                     onDragOver={(e) => { e.preventDefault(); setDragging("hero"); }} onDragLeave={() => setDragging(null)}
                     onDrop={(e) => { e.preventDefault(); setDragging(null); addHeroFiles(e.dataTransfer.files); }}
                     onClick={() => heroRef.current && heroRef.current.click()}>
-                    <b>تصاویر اسلایدر را اینجا رها کنید</b>
-                    <span>چند تصویر همزمان مجاز است</span>
+                    <b>چند تصویر را اینجا رها کنید تا به‌عنوان اسلاید جدید اضافه شوند</b>
+                    <span>یا کلیک کنید</span>
                   </div>
                   <div className="cp-hero-list">
                     {slides.map((s, i) => (
                       <div className="cp-hero-card" key={i}>
-                        <img src={s.img} alt="" />
+                        <button className="cp-hero-imgbtn" onClick={() => { setHeroImgIndex(i); heroImgRef.current && heroImgRef.current.click(); }} title="تغییر تصویر">
+                          {s.img ? <img src={s.img} alt="" /> : <span>+ تصویر</span>}
+                        </button>
                         <div className="cp-hero-fields">
-                          <input className="cp-text-input" value={s.title || ""} placeholder="عنوان (اختیاری)" onChange={(e) => updateHero(i, { title: e.target.value })} />
-                          <input className="cp-text-input" value={s.sub || ""} placeholder="زیرنویس (اختیاری)" onChange={(e) => updateHero(i, { sub: e.target.value })} />
+                          <input className="cp-text-input" value={s.title || ""} placeholder="عنوان" onChange={(e) => updateHero(i, { title: e.target.value })} />
+                          <input className="cp-text-input" value={s.sub || ""} placeholder="کپشن / زیرنویس" onChange={(e) => updateHero(i, { sub: e.target.value })} />
                           <div className="cp-hero-meta">
-                            <input className="cp-text-input" value={s.href || "#"} placeholder="لینک" onChange={(e) => updateHero(i, { href: e.target.value })} />
-                            <button className="cp-btn cp-btn-line" onClick={() => removeHero(i)}>حذف</button>
+                            <input className="cp-text-input" value={s.href || "#"} placeholder="لینک مقصد" dir="ltr" onChange={(e) => updateHero(i, { href: e.target.value })} />
+                            <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => moveHero(i, -1)} title="بالا">↑</button>
+                            <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => moveHero(i, 1)} title="پایین">↓</button>
+                            <button className="cp-btn cp-btn-line cp-btn-s" onClick={() => removeHero(i)} title="حذف">✕</button>
                           </div>
                         </div>
                       </div>
