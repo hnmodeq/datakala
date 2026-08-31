@@ -1,8 +1,14 @@
 /* ===== Datakala Control Panel ===== */
-.cp-fab{position:fixed;bottom:20px;left:20px;z-index:200;display:flex;align-items:center;gap:8px;
-  background:#111827;color:#fff;border-radius:28px;padding:11px 16px;font-family:Vazirmatn,Tahoma,sans-serif;
-  font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.28);cursor:pointer;border:0}
-.cp-fab:hover{background:#1f2937}
+/* Vertical tab pinned to the right edge of the screen (avoiding the chat widget at bottom-left) */
+.cp-fab{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:190;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:#111827;color:#fff;border:0;cursor:pointer;
+  padding:14px 9px;border-radius:12px 0 0 12px;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);transition:background .15s,padding .15s;
+  font-family:Vazirmatn,Tahoma,sans-serif}
+.cp-fab:hover{background:#1f2937;padding-left:14px}
+.cp-fab svg{color:var(--red,#C00000)}
+.cp-fab-label{writing-mode:vertical-rl;font-size:12px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
 
 .cp-overlay{position:fixed;inset:0;background:rgba(12,15,20,.5);backdrop-filter:blur(2px);z-index:210;
   display:flex;justify-content:flex-end;animation:cpFade .15s ease}
