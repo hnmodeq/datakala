@@ -2,17 +2,13 @@
 @font-face{font-family:Vazirmatn;src:url("/fonts/Vazirmatn-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
 @font-face{font-family:Vazirmatn;src:url("/fonts/Vazirmatn-SemiBold.woff2") format("woff2");font-weight:600;font-display:swap}
 @font-face{font-family:Vazirmatn;src:url("/fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
-@font-face{font-family:Kalameh;src:url("/fonts/Kalameh-Regular.woff2") format("woff2"),url("/fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:Kalameh;src:url("/fonts/Kalameh-Medium.woff2") format("woff2"),url("/fonts/Vazirmatn-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
-@font-face{font-family:Kalameh;src:url("/fonts/Kalameh-SemiBold.woff2") format("woff2"),url("/fonts/Vazirmatn-SemiBold.woff2") format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:Kalameh;src:url("/fonts/Kalameh-Bold.woff2") format("woff2"),url("/fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
 
 :root{
   --red:var(--red); --red-h:var(--red-h); --red-soft:#fff5f5; --ink:var(--ink); --ink-2:var(--ink-2); --muted:var(--muted);
   --muted-2:#8A8A8A; --line:#E8E8E8; --line-2:var(--line-2); --bg:#F6F7F9; --white:#fff;
   --star:var(--star); --success:var(--success); --accent:var(--accent);
   --shadow:0 8px 28px rgba(0,0,0,.08); --radius:6px; --max:1280px;
-  --font:Kalameh, Vazirmatn, Tahoma, "Segoe UI", Arial, sans-serif;
+  --font:Vazirmatn, Tahoma, "Segoe UI", Arial, sans-serif;
 }
 *{box-sizing:border-box} html,body{margin:0} html{direction:rtl}
 body{font-family:var(--font);color:var(--ink);background:#fff;line-height:1.8;text-align:right;-webkit-font-smoothing:antialiased}
@@ -452,3 +448,14 @@ button{cursor:pointer;border:0;background:none} ul{list-style:none;margin:0;padd
 @media (max-width:760px){
   .why-grid,.test-3,.fam-grid,.gal-grid,.blog-grid{grid-template-columns:1fr}
 }
+
+/* ===== Loading screen ===== */
+.dk-loader{position:fixed;inset:0;z-index:1000;background:#fff;display:flex;align-items:center;justify-content:center;
+  transition:opacity .45s ease;opacity:1}
+.dk-loader.fading{opacity:0;pointer-events:none}
+.dk-loader-inner{display:flex;flex-direction:column;align-items:center;gap:14px;padding:0 24px;text-align:center}
+.dk-loader-logo{height:46px;width:auto;display:block}
+.dk-loader-name{font-size:15px;font-weight:600;color:var(--ink);direction:rtl}
+.dk-loader-bar{width:min(320px,70vw);height:6px;border-radius:6px;background:var(--line-2);overflow:hidden}
+.dk-loader-fill{height:100%;border-radius:6px;background:var(--red);transition:width .15s linear}
+.dk-loader-pct{font-size:12px;font-weight:600;color:var(--muted);direction:ltr}

@@ -78,33 +78,6 @@ export function ControlProvider({ children }) {
     return () => { alive = false; };
   }, []);
 
-  // ---- restore lightweight preview state ----
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("dk_control");
-      if (!raw) return;
-      const d = JSON.parse(raw);
-      if (d.siteName) setSiteName(d.siteName);
-      if (d.colors) setColors((c) => ({ ...COLORS, ...c, ...d.colors }));
-      if (d.nav) setNav(d.nav);
-      if (d.contacts) setContacts(d.contacts);
-      if (d.footer) setFooter((f) => ({ ...f, ...d.footer }));
-      if (d.subFooter2) setSubFooter2(d.subFooter2);
-      if (d.layout) setLayout((l) => ({ ...DEFAULT_LAYOUT, ...l, ...d.layout }));
-      if (d.sections) setSections((s) => ({ ...DEFAULT_SECTIONS, ...s, ...d.sections }));
-      if (d.sectionTitles) setSectionTitles((t) => ({ ...DEFAULT_TITLES, ...t, ...d.sectionTitles }));
-    } catch {}
-  }, []);
-
-  // ---- persist lightweight preview state ----
-  useEffect(() => {
-    try {
-      localStorage.setItem("dk_control", JSON.stringify({
-        siteName, colors, nav, contacts, footer, subFooter2, layout, sections, sectionTitles,
-      }));
-    } catch {}
-  }, [siteName, colors, nav, contacts, footer, subFooter2, layout, sections, sectionTitles]);
-
   // ---- live: browser tab title ----
   useEffect(() => { document.title = siteName || "دیتاکالا"; }, [siteName]);
 
