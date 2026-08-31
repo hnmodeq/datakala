@@ -66,7 +66,7 @@
     {
       "kind": "link",
       "label": "تماس با ما",
-      "href": "/contact"
+      "href": "#"
     }
   ],
   "contacts": [
@@ -74,19 +74,19 @@
       "img": "/images/20251204162824r6935v.svg",
       "title": "استعلام پروژه",
       "text": "پشتیبانی فنی سفارشی برای درخواست‌های مختلف.",
-      "href": "/contact"
+      "href": "#"
     },
     {
       "img": "/images/20251204162824fbn9xq.svg",
       "title": "تماس با فروش",
       "text": "برای استعلام محصولات و راه‌حل‌ها با تیم فروش ما تماس بگیرید.",
-      "href": "/contact"
+      "href": "#"
     },
     {
       "img": "/images/20251204162824bn64ca.svg",
       "title": "گفتگوی آنلاین",
       "text": "همین حالا با کارشناس زنده برای پرسش‌های عمومی گفتگو کنید.",
-      "href": "/support"
+      "href": "#"
     }
   ],
   "footer": {
@@ -226,8 +226,8 @@
     "companyHref": "/",
     "copyrightSuffix": " محفوظ می‌باشد.",
     "designerText": "طراحی شده توسط",
-    "designerName": "",
-    "designerHref": "#"
+    "designerName": "بومیم",
+    "designerHref": "www.bumims.ir"
   },
   "layout": {
     "heroCategoriesRows": 2,
