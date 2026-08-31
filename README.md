@@ -1,8 +1,3 @@
-# FS.com clone (Next.js App Router)
-
-Next.js 15 App Router storefront cloned from [FS.com](https://www.fs.com/).
-
-## Features
 
 - Homepage hero, **hover category mega-panels** (Switches → Testers & Tools), New/Recommended products
 - Header **All Products** mega-menu with left-rail categories
